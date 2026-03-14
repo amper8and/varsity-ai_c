@@ -406,16 +406,18 @@ function renderOnboarding() {
 function renderHome() {
   return `
     <section class="screen-stack">
-      <article class="hero-panel home-hero-panel">
-        <div class="hero-layout compact">
-          <div class="hero-copy compact">
+      <article class="hero-panel home-hero-panel media-hero-panel">
+        <img class="hero-media-image" src="${heroImage()}" alt="" />
+        <div class="hero-media-scrim"></div>
+        <div class="hero-layout compact media">
+          <div class="hero-copy compact media">
             <p class="eyebrow">Today</p>
             <h2 class="hero-title compact">${state.role === "student" ? "Campus" : "Alumni"}</h2>
             <div class="chip-row" style="margin-top: 14px;">
               ${roleData().pills.map((item) => chip(item, "story-badge")).join("")}
             </div>
           </div>
-          <div class="hero-visual poster-visual">
+          <div class="hero-visual poster-visual overlay">
             <div class="poster-stack">
               <div class="poster-card poster-primary">
                 <span>${state.role === "student" ? "Next" : "Upcoming"}</span>
@@ -431,9 +433,6 @@ function renderHome() {
               </div>
             </div>
           </div>
-        </div>
-        <div class="metric-row visual-metric-row">
-          ${roleData().heroStats.map((item) => `<div class="mini-stat glass"><strong>${item.value}</strong><span>${item.label}</span></div>`).join("")}
         </div>
       </article>
 
@@ -466,6 +465,8 @@ function renderHome() {
           ${featuredDeals.map((item) => `
             <button class="offer-poster" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
               <div class="offer-poster-media">
+                <img class="poster-media-image" src="${mediaImage(item.id)}" alt="" />
+                <div class="image-scrim"></div>
                 ${chip(item.tag, "tiny-badge")}
                 <div class="offer-value">${item.value}</div>
                 <div class="offer-mini-chip">${item.meta}</div>
@@ -511,6 +512,14 @@ function renderExplore() {
 
   return `
     <section class="screen-stack">
+      <article class="section-banner">
+        <img class="banner-image" src="./assets/explore-banner.svg" alt="" />
+        <div class="banner-scrim"></div>
+        <div class="banner-copy">
+          <p class="eyebrow">Explore</p>
+          <h3 class="section-title">Featured</h3>
+        </div>
+      </article>
       <div class="panel compact-panel">
         <div class="section-head">
           <div>
@@ -527,6 +536,8 @@ function renderExplore() {
         ${items.map((item) => `
           <button class="market-poster" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
             <div class="market-poster-visual">
+              <img class="poster-media-image" src="${mediaImage(item.id)}" alt="" />
+              <div class="image-scrim"></div>
               ${chip(item.tag, "tiny-badge")}
               <div class="market-poster-price">${item.price}</div>
               <div class="market-poster-art"></div>
@@ -580,6 +591,14 @@ function renderAI() {
 function renderCommunity() {
   return `
     <section class="screen-stack">
+      <article class="section-banner narrow-banner">
+        <img class="banner-image" src="./assets/alumni-spotlight.svg" alt="" />
+        <div class="banner-scrim"></div>
+        <div class="banner-copy">
+          <p class="eyebrow">Spotlight</p>
+          <h3 class="section-title">Community</h3>
+        </div>
+      </article>
       <section>
         <div class="section-head">
           <div>
@@ -609,6 +628,8 @@ function renderCommunity() {
           ${jobs.map((item) => `
             <button class="market-poster job-poster" type="button" style="--tone:${item.tone}; --tone-soft:${item.tone};" data-sheet-type="job" data-sheet-id="${item.id}">
               <div class="market-poster-visual">
+                <img class="poster-media-image" src="./assets/explore-banner.svg" alt="" />
+                <div class="image-scrim"></div>
                 ${chip(item.meta, "tiny-badge")}
                 <div class="market-poster-price">Open</div>
                 <div class="market-poster-art"></div>
@@ -620,6 +641,8 @@ function renderCommunity() {
             </button>`).join("")}
           <button class="market-poster business-poster" type="button" style="--tone:#7d4fd6; --tone-soft:#efe6ff;" data-route="deal-detail" data-route-id="deal-business">
             <div class="market-poster-visual">
+              <img class="poster-media-image" src="./assets/alumni-spotlight.svg" alt="" />
+              <div class="image-scrim"></div>
               ${chip("Growth", "tiny-badge")}
               <div class="market-poster-price">Reach</div>
               <div class="market-poster-art"></div>
@@ -1157,6 +1180,10 @@ document.addEventListener("click", (event) => {
 
 root.sheetCloseIcon.innerHTML = icons.close;
 render();
+
+
+
+
 
 
 
