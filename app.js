@@ -11,6 +11,7 @@
 const icons = {
   home: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5 10.5V20h14v-9.5"></path></svg>`,
   explore: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="m15.5 8.5-2.8 6-4.2 1.6 1.6-4.2z"></path></svg>`,
+  search: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg>`,
   spark: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2 1.8 4.8L20 8.5l-4.2 3.1L17.2 17 13 13.9 8.8 17l1.4-5.4L6 8.5l5.2-1.7z"></path></svg>`,
   users: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 12.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M15.5 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path><path d="M3.5 19c1.4-2.4 3.5-3.6 6.3-3.6S14.7 16.6 16 19"></path><path d="M14.5 18c.7-1.4 1.9-2.1 3.6-2.1s2.8.7 3.4 2.1"></path></svg>`,
   wallet: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v2H6.5A2.5 2.5 0 0 0 4 11.5z"></path><path d="M20 9H6.5A2.5 2.5 0 0 0 4 11.5v5A2.5 2.5 0 0 0 6.5 19H20z"></path><circle cx="16.5" cy="14" r="1"></circle></svg>`,
@@ -61,7 +62,7 @@ const roles = {
   student: {
     label: "Student mode",
     greeting: "Hi, Adaeze",
-    subtitle: "Your week is organized.",
+    subtitle: "",
     avatar: "AD",
     pills: ["Engineering", "300 level", "Verified"],
     heroTitle: "Today",
@@ -80,7 +81,7 @@ const roles = {
   alumni: {
     label: "Alumni mode",
     greeting: "Hi, Chinedu",
-    subtitle: "Your network is active.",
+    subtitle: "",
     avatar: "CH",
     pills: ["Class of 2016", "Lagos chapter", "Verified"],
     heroTitle: "Today",
@@ -104,6 +105,25 @@ const quickActions = [
   { id: "planner", title: "Planner", copy: "Organize the week", icon: "planner", route: "study-planner", tone: "#d6a348" },
   { id: "ai", title: "Zik AI", copy: "Ask and act", icon: "spark", tab: "ai", tone: "#db6d57" },
 ];
+
+const shortcutSets = {
+  student: [
+    { title: "Hostels", icon: "hostel", tone: "#0d5c44", route: "accommodation" },
+    { title: "Map", icon: "map", tone: "#2a7b72", route: "campus-map" },
+    { title: "Planner", icon: "planner", tone: "#d6a348", route: "study-planner" },
+    { title: "Meals", icon: "food", tone: "#db6d57", route: "deal-detail", ref: "deal-food" },
+    { title: "Jobs", icon: "jobs", tone: "#4677c9", route: "job-board" },
+    { title: "Events", icon: "spark", tone: "#0d5c44", route: "event-calendar" }
+  ],
+  alumni: [
+    { title: "Mentors", icon: "mentor", tone: "#0d5c44", route: "alumni-network" },
+    { title: "Chapters", icon: "users", tone: "#2a7b72", route: "alumni-network" },
+    { title: "Business", icon: "wallet", tone: "#7d4fd6", route: "deal-detail", ref: "deal-business" },
+    { title: "Events", icon: "spark", tone: "#d6a348", route: "event-calendar" },
+    { title: "Jobs", icon: "jobs", tone: "#4677c9", route: "job-board" },
+    { title: "Wallet", icon: "gift", tone: "#db6d57", route: "redemption" }
+  ]
+};
 
 const featuredDeals = [
   { id: "deal-hostel", title: "Green Court", copy: "Flexible hostel booking", value: "12% off", meta: "52 rooms left", tone: "#0d5c44", soft: "#dbf2e4", tag: "Verified" },
@@ -205,6 +225,42 @@ function avatar(initials, tone = "#0d5c44") {
   return `<div class="avatar-ring" style="background:linear-gradient(135deg, ${tone}, #d6a348)"><span>${initials}</span></div>`;
 }
 
+function heroImage() {
+  return state.role === "student" ? "./assets/home-hero.svg" : "./assets/alumni-spotlight.svg";
+}
+
+function mediaImage(id) {
+  const images = {
+    "deal-hostel": "./assets/home-hero.svg",
+    "deal-lodge": "./assets/home-hero.svg",
+    "deal-food": "./assets/meal-pass.svg",
+    "deal-cafe": "./assets/meal-pass.svg",
+    "deal-data": "./assets/offer-bundle.svg",
+    "deal-jobkit": "./assets/explore-banner.svg",
+    "deal-business": "./assets/alumni-spotlight.svg"
+  };
+
+  return images[id] || "./assets/explore-banner.svg";
+}
+
+function actionAttrs(item) {
+  if (item.route) {
+    return `data-route="${item.route}"${item.ref ? ` data-route-id="${item.ref}"` : ""}`;
+  }
+
+  return `data-tab-jump="${item.tab}"`;
+}
+
+function searchField(label, attrs = 'data-tab="explore"') {
+  return `
+    <button class="search-field" type="button" ${attrs}>
+      ${icon("search", "search-icon")}
+      <span>${label}</span>
+      <span class="search-spark">${icons.spark}</span>
+    </button>
+  `;
+}
+
 function renderHeader() {
   if (state.phase === "onboarding") {
     root.header.innerHTML = `
@@ -223,6 +279,7 @@ function renderHeader() {
   }
 
   if (state.route) {
+    const subtitle = routeSubtitle(state.route);
     root.header.innerHTML = `
       <div class="header-row">
         <div class="header-primary">
@@ -230,7 +287,7 @@ function renderHeader() {
           <div class="header-copy">
             <p class="eyebrow">${roleData().label}</p>
             <h2>${routeTitle(state.route)}</h2>
-            <p>${routeSubtitle(state.route)}</p>
+            ${subtitle ? `<p>${subtitle}</p>` : ""}
           </div>
         </div>
         <button class="icon-button" type="button" data-notifications="true">${icon("bell", "icon-holder")}</button>
@@ -239,6 +296,7 @@ function renderHeader() {
     return;
   }
 
+  const subtitle = roleData().subtitle;
   root.header.innerHTML = `
     <div class="header-row">
       <div class="header-primary">
@@ -246,7 +304,7 @@ function renderHeader() {
         <div class="header-copy">
           <p class="eyebrow">${roleData().label}</p>
           <h2>${roleData().greeting}</h2>
-          <p>${roleData().subtitle}</p>
+          ${subtitle ? `<p>${subtitle}</p>` : ""}
         </div>
       </div>
       <div class="header-actions">
@@ -404,104 +462,105 @@ function renderOnboarding() {
 }
 
 function renderHome() {
+  const hero = state.role === "student"
+    ? {
+        image: "./assets/home-hero.svg",
+        badge: "Live now",
+        meta: "2,540 pts",
+        title: "Green Court",
+        subline: "52 rooms | 8 mins",
+        route: "accommodation"
+      }
+    : {
+        image: "./assets/alumni-spotlight.svg",
+        badge: "Spotlight",
+        meta: "Lagos chapter",
+        title: "Founder mixer",
+        subline: "Fri | alumni circle",
+        route: "alumni-network"
+      };
+  const shortcuts = shortcutSets[state.role];
+  const leadDeal = state.role === "student" ? featuredDeals[1] : marketplaceDeals.find((item) => item.id === "deal-business");
+  const sideCards = state.role === "student"
+    ? [featuredDeals[0], marketplaceDeals.find((item) => item.id === "deal-jobkit")]
+    : [featuredDeals[2], marketplaceDeals.find((item) => item.id === "deal-jobkit")];
+  const leadEvent = state.role === "student" ? events[0] : events[1];
+
   return `
-    <section class="screen-stack">
-      <article class="hero-panel home-hero-panel media-hero-panel">
-        <img class="hero-media-image" src="${heroImage()}" alt="" />
-        <div class="hero-media-scrim"></div>
-        <div class="hero-layout compact media">
-          <div class="hero-copy compact media">
-            <p class="eyebrow">Today</p>
-            <h2 class="hero-title compact">${state.role === "student" ? "Campus" : "Alumni"}</h2>
-            <div class="chip-row" style="margin-top: 14px;">
-              ${roleData().pills.map((item) => chip(item, "story-badge")).join("")}
+    <section class="screen-stack rich-screen">
+      ${searchField(state.role === "student" ? "Search housing, deals, Zik AI" : "Search people, business, events")}
+
+      <button class="feature-stage-card" type="button" data-route="${hero.route}">
+        <img class="feature-stage-image" src="${hero.image}" alt="" />
+        <div class="stage-dim"></div>
+        <div class="stage-topline">
+          ${chip(hero.badge, "tiny-badge")}
+          ${chip(hero.meta, "tiny-badge ghost-light")}
+        </div>
+        <div class="stage-bottom">
+          <div>
+            <p class="stage-kicker">Community</p>
+            <h3>${hero.title}</h3>
+            <span>${hero.subline}</span>
+          </div>
+          <span class="stage-cta">${icons.arrow}</span>
+        </div>
+      </button>
+
+      <div class="shortcut-matrix">
+        ${shortcuts.map((item) => `
+          <button class="shortcut-tile" type="button" style="--tone:${item.tone};" ${actionAttrs(item)}>
+            <span class="shortcut-icon">${icons[item.icon]}</span>
+            <span class="shortcut-label">${item.title}</span>
+          </button>
+        `).join("")}
+      </div>
+
+      <div class="media-pair">
+        <button class="wide-media-card" type="button" data-route="deal-detail" data-route-id="${leadDeal.id}">
+          <img class="wide-media-image" src="${mediaImage(leadDeal.id)}" alt="" />
+          <div class="wide-media-scrim"></div>
+          <div class="wide-media-head">${chip(leadDeal.tag, "tiny-badge")}</div>
+          <div class="wide-media-body">
+            <div>
+              <strong>${leadDeal.title}</strong>
+              <span>${leadDeal.meta}</span>
             </div>
+            <div class="media-stat">${leadDeal.value || leadDeal.price}</div>
           </div>
-          <div class="hero-visual poster-visual overlay">
-            <div class="poster-stack">
-              <div class="poster-card poster-primary">
-                <span>${state.role === "student" ? "Next" : "Upcoming"}</span>
-                <strong>${state.role === "student" ? "11:00 class" : "Fri mixer"}</strong>
-              </div>
-              <div class="poster-card poster-secondary">
-                <span>Wallet</span>
-                <strong>2,540 pts</strong>
-              </div>
-              <div class="poster-card poster-tertiary">
-                <span>${state.role === "student" ? "Hostels" : "Network"}</span>
-                <strong>${state.role === "student" ? "52 live" : "42 nearby"}</strong>
-              </div>
+        </button>
+
+        <div class="mini-stack">
+          <button class="mini-media-card soft" type="button" data-sheet-type="event" data-sheet-id="${leadEvent.id}">
+            <div class="mini-media-body">
+              <div class="event-date-pill">${leadEvent.month} ${leadEvent.day}</div>
+              <strong>${leadEvent.title}</strong>
+              <span>${leadEvent.meta}</span>
             </div>
-          </div>
+          </button>
+          <button class="mini-media-card deep" type="button" data-route="deal-detail" data-route-id="${sideCards[0].id}">
+            <img class="mini-media-image" src="${mediaImage(sideCards[0].id)}" alt="" />
+            <div class="mini-media-scrim"></div>
+            <div class="mini-media-body white">
+              <strong>${sideCards[0].title}</strong>
+              <span>${sideCards[0].value || sideCards[0].price}</span>
+            </div>
+          </button>
         </div>
-      </article>
+      </div>
 
-      <section>
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Shortcuts</p>
-            <h3 class="section-title">Quick access</h3>
-          </div>
-        </div>
-        <div class="quick-action-rail" style="margin-top: 12px;">
-          ${quickActions.map((item) => `
-            <button class="quick-visual-card" type="button" style="--tone:${item.tone};" ${item.route ? `data-route="${item.route}"` : `data-tab-jump="${item.tab}"`}>
-              <div class="quick-visual-icon">${icons[item.icon]}</div>
-              <div class="quick-visual-art"></div>
-              <div class="quick-visual-label">${item.title}</div>
-            </button>`).join("")}
-        </div>
-      </section>
-
-      <section>
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Offers</p>
-            <h3 class="section-title">Saved for you</h3>
-          </div>
-          <button class="soft-button" type="button" data-tab="explore">${icon("explore", "icon-holder")}</button>
-        </div>
-        <div class="poster-strip" style="margin-top: 12px;">
-          ${featuredDeals.map((item) => `
-            <button class="offer-poster" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
-              <div class="offer-poster-media">
-                <img class="poster-media-image" src="${mediaImage(item.id)}" alt="" />
-                <div class="image-scrim"></div>
-                ${chip(item.tag, "tiny-badge")}
-                <div class="offer-value">${item.value}</div>
-                <div class="offer-mini-chip">${item.meta}</div>
-              </div>
-              <div class="offer-poster-footer">
-                <strong>${item.title}</strong>
-                <span>${item.copy}</span>
-              </div>
-            </button>`).join("")}
-        </div>
-      </section>
-
-      <section>
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Events</p>
-            <h3 class="section-title">Coming up</h3>
-          </div>
-          <button class="soft-button" type="button" data-route="event-calendar">${icon("planner", "icon-holder")}</button>
-        </div>
-        <div class="event-tile-stack" style="margin-top: 12px;">
-          ${events.slice(0, 2).map((item) => `
-            <button class="event-poster" type="button" style="--tone:${item.tone};" data-sheet-type="event" data-sheet-id="${item.id}">
-              <div class="event-date-badge">
-                <span>${item.month}</span>
-                <strong>${item.day}</strong>
-              </div>
-              <div class="event-poster-copy">
-                <strong>${item.title}</strong>
-                <span>${item.meta}</span>
-              </div>
-              <div class="event-poster-mark">${icons.spark}</div>
-            </button>`).join("")}
-        </div>
-      </section>
+      <div class="mini-deal-grid">
+        ${sideCards.map((item) => `
+          <button class="mini-poster-card" type="button" data-route="deal-detail" data-route-id="${item.id}">
+            <img class="mini-poster-image" src="${mediaImage(item.id)}" alt="" />
+            <div class="mini-poster-scrim"></div>
+            <div class="mini-poster-copy">
+              <strong>${item.title}</strong>
+              <span>${item.value || item.price || item.meta}</span>
+            </div>
+          </button>
+        `).join("")}
+      </div>
     </section>
   `;
 }
@@ -509,44 +568,41 @@ function renderHome() {
 function renderExplore() {
   const categories = ["all", "housing", "food", "career", "business"];
   const items = state.category === "all" ? marketplaceDeals : marketplaceDeals.filter((item) => item.category === state.category);
+  const banner = items[0] || marketplaceDeals[0];
 
   return `
-    <section class="screen-stack">
-      <article class="section-banner">
-        <img class="banner-image" src="./assets/explore-banner.svg" alt="" />
-        <div class="banner-scrim"></div>
-        <div class="banner-copy">
-          <p class="eyebrow">Explore</p>
-          <h3 class="section-title">Featured</h3>
-        </div>
-      </article>
-      <div class="panel compact-panel">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Marketplace</p>
-            <h3 class="section-title">Browse</h3>
-          </div>
-          ${chip(`${items.length}`, "badge gold")}
-        </div>
-        <div class="chip-row" style="margin-top: 12px;">
-          ${categories.map((item) => `<button class="filter-chip ${state.category === item ? "active" : ""}" type="button" data-category="${item}">${item === "all" ? "All" : item}</button>`).join("")}
-        </div>
+    <section class="screen-stack rich-screen">
+      ${searchField("Search deals, housing, food")}
+
+      <div class="chip-row compact-chip-row">
+        ${categories.map((item) => `<button class="filter-chip ${state.category === item ? "active" : ""}" type="button" data-category="${item}">${item === "all" ? "All" : item}</button>`).join("")}
       </div>
-      <div class="market-grid-media">
+
+      <button class="market-banner-card" type="button" data-route="deal-detail" data-route-id="${banner.id}">
+        <img class="banner-image" src="./assets/explore-banner.svg" alt="" />
+        <div class="banner-scrim strong"></div>
+        <div class="market-banner-copy">
+          ${chip(banner.tag, "tiny-badge")}
+          <h3>${banner.title}</h3>
+          <span>${banner.price}</span>
+        </div>
+      </button>
+
+      <div class="market-grid-media rich-grid">
         ${items.map((item) => `
-          <button class="market-poster" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
+          <button class="market-poster media-forward" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
             <div class="market-poster-visual">
               <img class="poster-media-image" src="${mediaImage(item.id)}" alt="" />
               <div class="image-scrim"></div>
               ${chip(item.tag, "tiny-badge")}
               <div class="market-poster-price">${item.price}</div>
-              <div class="market-poster-art"></div>
             </div>
-            <div class="market-poster-copy">
+            <div class="market-poster-copy slim">
               <strong>${item.title}</strong>
               <span>${item.meta}</span>
             </div>
-          </button>`).join("")}
+          </button>
+        `).join("")}
       </div>
     </section>
   `;
@@ -554,35 +610,50 @@ function renderExplore() {
 
 function renderAI() {
   const prompt = prompts[state.prompt];
+  const related = state.prompt === "housing"
+    ? [marketplaceDeals[0], featuredDeals[1]]
+    : state.prompt === "timetable"
+      ? [featuredDeals[2], marketplaceDeals[4]]
+      : [marketplaceDeals[5], featuredDeals[0]];
+
   return `
-    <section class="screen-stack">
-      <article class="ai-panel visual-ai-panel">
-        <div class="ai-stage visual">
-          <div class="ai-orb large"></div>
-          <div class="ai-visual-card">
-            <p class="eyebrow">Zik AI</p>
-            <h3 class="section-title">${prompt.action}</h3>
-            <div class="chat-bubble user compact" style="margin-top: 12px;">${prompt.title}</div>
-            <div class="ai-answer-chips">
-              <span>${prompt.answer.split('.')[0]}</span>
-            </div>
-          </div>
+    <section class="screen-stack rich-screen">
+      ${searchField(prompt.title, `data-prompt="${state.prompt}"`)}
+
+      <article class="ai-stage-card">
+        <div class="ai-glow"></div>
+        <div class="ai-orbital one"></div>
+        <div class="ai-orbital two"></div>
+        <div class="ai-core-card">
+          ${chip("Zik AI", "tiny-badge")}
+          <h3>${prompt.action}</h3>
+          <span>${prompt.answer.split(".")[0]}</span>
         </div>
+        <button class="ai-float-card left" type="button" data-route="${prompt.route}">
+          <strong>Open</strong>
+          <span>${prompt.action}</span>
+        </button>
+        <button class="ai-float-card right" type="button" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
+          <strong>3</strong>
+          <span>matches</span>
+        </button>
       </article>
-      <div class="ai-prompt-grid">
+
+      <div class="ai-prompt-grid compact-prompts">
         ${Object.entries(prompts).map(([key, item]) => `<button class="prompt-visual ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}"><span>${item.action}</span></button>`).join("")}
       </div>
-      <div class="quick-action-rail two-up">
-        <button class="quick-visual-card active" type="button" style="--tone:#0d5c44;" data-route="${prompt.route}">
-          <div class="quick-visual-icon">${icons.spark}</div>
-          <div class="quick-visual-art"></div>
-          <div class="quick-visual-label">Open</div>
-        </button>
-        <button class="quick-visual-card" type="button" style="--tone:#d6a348;" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
-          <div class="quick-visual-icon">${icons.verify}</div>
-          <div class="quick-visual-art"></div>
-          <div class="quick-visual-label">Details</div>
-        </button>
+
+      <div class="mini-deal-grid">
+        ${related.map((item) => `
+          <button class="mini-poster-card" type="button" data-route="deal-detail" data-route-id="${item.id}">
+            <img class="mini-poster-image" src="${mediaImage(item.id)}" alt="" />
+            <div class="mini-poster-scrim"></div>
+            <div class="mini-poster-copy">
+              <strong>${item.title}</strong>
+              <span>${item.value || item.price || item.meta}</span>
+            </div>
+          </button>
+        `).join("")}
       </div>
     </section>
   `;
@@ -590,116 +661,104 @@ function renderAI() {
 
 function renderCommunity() {
   return `
-    <section class="screen-stack">
-      <article class="section-banner narrow-banner">
-        <img class="banner-image" src="./assets/alumni-spotlight.svg" alt="" />
-        <div class="banner-scrim"></div>
-        <div class="banner-copy">
-          <p class="eyebrow">Spotlight</p>
-          <h3 class="section-title">Community</h3>
-        </div>
-      </article>
-      <section>
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Mentors</p>
-            <h3 class="section-title">People</h3>
-          </div>
-          <button class="soft-button" type="button" data-route="alumni-network">${icon("users", "icon-holder")}</button>
-        </div>
-        <div class="mentor-visual-row" style="margin-top: 12px;">
-          ${mentors.map((item) => `
-            <button class="mentor-visual-card" type="button" style="--tone:${item.tone};" data-route="mentor-profile" data-route-id="${item.id}">
-              ${avatar(item.initials, item.tone)}
-              <strong>${item.name}</strong>
-              <span>${item.role}</span>
-            </button>`).join("")}
-        </div>
-      </section>
+    <section class="screen-stack rich-screen">
+      ${searchField("Search mentors, chapters, businesses", 'data-route="alumni-network"')}
 
-      <section>
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Opportunity</p>
-            <h3 class="section-title">Open now</h3>
-          </div>
+      <button class="market-banner-card people-banner" type="button" data-route="alumni-network">
+        <img class="banner-image" src="./assets/alumni-spotlight.svg" alt="" />
+        <div class="banner-scrim strong"></div>
+        <div class="market-banner-copy">
+          ${chip("Spotlight", "tiny-badge")}
+          <h3>UNIZIK network</h3>
+          <span>Mentors, founders, chapters</span>
         </div>
-        <div class="market-grid-media" style="margin-top: 12px;">
-          ${jobs.map((item) => `
-            <button class="market-poster job-poster" type="button" style="--tone:${item.tone}; --tone-soft:${item.tone};" data-sheet-type="job" data-sheet-id="${item.id}">
-              <div class="market-poster-visual">
-                <img class="poster-media-image" src="./assets/explore-banner.svg" alt="" />
-                <div class="image-scrim"></div>
-                ${chip(item.meta, "tiny-badge")}
-                <div class="market-poster-price">Open</div>
-                <div class="market-poster-art"></div>
-              </div>
-              <div class="market-poster-copy">
-                <strong>${item.title}</strong>
-                <span>${item.meta}</span>
-              </div>
-            </button>`).join("")}
-          <button class="market-poster business-poster" type="button" style="--tone:#7d4fd6; --tone-soft:#efe6ff;" data-route="deal-detail" data-route-id="deal-business">
-            <div class="market-poster-visual">
-              <img class="poster-media-image" src="./assets/alumni-spotlight.svg" alt="" />
-              <div class="image-scrim"></div>
-              ${chip("Growth", "tiny-badge")}
-              <div class="market-poster-price">Reach</div>
-              <div class="market-poster-art"></div>
-            </div>
-            <div class="market-poster-copy">
+      </button>
+
+      <div class="mentor-visual-row people-row">
+        ${mentors.map((item) => `
+          <button class="mentor-visual-card person-card" type="button" style="--tone:${item.tone};" data-route="mentor-profile" data-route-id="${item.id}">
+            ${avatar(item.initials, item.tone)}
+            <strong>${item.name}</strong>
+            <span>${item.role}</span>
+          </button>
+        `).join("")}
+      </div>
+
+      <div class="media-pair community-pair">
+        <button class="wide-media-card violet" type="button" data-route="deal-detail" data-route-id="deal-business">
+          <img class="wide-media-image" src="./assets/alumni-spotlight.svg" alt="" />
+          <div class="wide-media-scrim"></div>
+          <div class="wide-media-head">${chip("Growth", "tiny-badge")}</div>
+          <div class="wide-media-body">
+            <div>
               <strong>Business showcase</strong>
               <span>Alumni placement</span>
             </div>
-          </button>
+            <div class="media-stat">Reach</div>
+          </div>
+        </button>
+
+        <div class="mini-stack">
+          ${jobs.map((item) => `
+            <button class="mini-media-card white" type="button" data-sheet-type="job" data-sheet-id="${item.id}">
+              <div class="mini-media-body dark">
+                <div class="event-date-pill neutral">Open</div>
+                <strong>${item.title}</strong>
+                <span>${item.meta}</span>
+              </div>
+            </button>
+          `).join("")}
         </div>
-      </section>
+      </div>
     </section>
   `;
 }
 
 function renderWallet() {
   return `
-    <section class="screen-stack">
-      <article class="wallet-card rich-wallet-card">
-        <div class="wallet-topline">
-          <p class="eyebrow">${state.role === "student" ? "Campus wallet" : "Member wallet"}</p>
+    <section class="screen-stack rich-screen">
+      <article class="wallet-stage-card">
+        <div class="wallet-stage-top">
           ${chip("Verified", "tiny-badge")}
+          ${chip(state.role === "student" ? "Campus wallet" : "Member wallet", "tiny-badge ghost-light")}
         </div>
-        <div class="wallet-balance">2,540 pts</div>
-        <div class="wallet-visual-grid">
-          <div class="wallet-mini-card"><span>Saved</span><strong>N3,200</strong></div>
-          <div class="wallet-mini-card"><span>Live</span><strong>4 items</strong></div>
+        <div class="wallet-points">2,540 pts</div>
+        <div class="wallet-stage-bottom">
+          <div class="wallet-stage-chip">Saved N3,200</div>
+          <div class="wallet-stage-chip">4 live perks</div>
         </div>
       </article>
 
-      <div class="quick-action-rail two-up">
-        <button class="quick-visual-card active" type="button" style="--tone:#d6a348;" data-route="redemption">
-          <div class="quick-visual-icon">${icons.gift}</div>
-          <div class="quick-visual-art"></div>
-          <div class="quick-visual-label">Redeem</div>
-        </button>
-        <button class="quick-visual-card" type="button" style="--tone:#0d5c44;" data-route="verification">
-          <div class="quick-visual-icon">${icons.verify}</div>
-          <div class="quick-visual-art"></div>
-          <div class="quick-visual-label">Verify</div>
-        </button>
+      <div class="reward-media-strip">
+        ${rewards.map((item) => `
+          <button class="reward-media-card" type="button" style="--tone:${item.tone};" data-sheet-type="reward" data-sheet-id="${item.id}">
+            <img class="reward-media-image" src="${item.id === "meal" ? "./assets/meal-pass.svg" : item.id === "data" ? "./assets/offer-bundle.svg" : "./assets/explore-banner.svg"}" alt="" />
+            <div class="reward-media-scrim"></div>
+            <div class="reward-media-copy">
+              <strong>${item.title}</strong>
+              <span>${item.copy}</span>
+            </div>
+          </button>
+        `).join("")}
       </div>
 
-      <section class="panel compact-panel">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Saved</p>
-            <h3 class="section-title">Shortlist</h3>
+      <div class="media-pair wallet-pair">
+        <button class="mini-media-card deep" type="button" data-route="redemption">
+          <img class="mini-media-image" src="./assets/offer-bundle.svg" alt="" />
+          <div class="mini-media-scrim"></div>
+          <div class="mini-media-body white">
+            <strong>Redeem</strong>
+            <span>Codes ready</span>
           </div>
-        </div>
-        <div class="saved-strip" style="margin-top: 12px;">
-          <button class="saved-chip active" type="button" data-route="deal-detail" data-route-id="deal-hostel">Hostel</button>
-          <button class="saved-chip" type="button" data-route="mentor-profile" data-route-id="mentor-ifeoma">Mentor</button>
-          <button class="saved-chip" type="button" data-route="event-calendar">Events</button>
-          <button class="saved-chip" type="button" data-route="job-board">Jobs</button>
-        </div>
-      </section>
+        </button>
+        <button class="mini-media-card white" type="button" data-route="verification">
+          <div class="mini-media-body dark">
+            <div class="event-date-pill neutral">Access</div>
+            <strong>Verification</strong>
+            <span>ID linked</span>
+          </div>
+        </button>
+      </div>
     </section>
   `;
 }
@@ -722,18 +781,18 @@ function routeTitle(route) {
 
 function routeSubtitle(route) {
   const names = {
-    accommodation: "Verified housing flow",
-    "campus-map": "Key places and context",
-    "study-planner": "Organize the week visually",
-    "event-calendar": "Community dates and chapters",
-    "mentor-profile": "High-trust connection",
-    "deal-detail": "Curated partner offer",
-    "job-board": "Career and business opportunities",
-    "alumni-network": "Context-aware reconnection",
-    redemption: "Points and perks",
-    verification: "Identity and access",
+    accommodation: "Ifite corridor",
+    "campus-map": "Awka campus",
+    "study-planner": "This week",
+    "event-calendar": "March",
+    "mentor-profile": "Verified mentor",
+    "deal-detail": "Partner offer",
+    "job-board": "Open roles",
+    "alumni-network": "Shared context",
+    redemption: "Points live",
+    verification: "Identity linked"
   };
-  return names[route.id] || roleData().label;
+  return names[route.id] || "";
 }
 
 function routeDeal(id) {
@@ -1180,6 +1239,7 @@ document.addEventListener("click", (event) => {
 
 root.sheetCloseIcon.innerHTML = icons.close;
 render();
+
 
 
 
