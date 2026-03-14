@@ -1,29 +1,29 @@
-﻿# Varsity AI Demo App
+﻿# Varsity AI Mobile Demo
 
-A polished single-page demo for the UNIZIK community hub concept, built from the product requirements, design guide and mockup review in `tasks/varsity ai`.
+A mobile-first interactive prototype for the UNIZIK community hub concept. This version is structured as an app experience rather than a presentation page.
 
-## What is included
+## Included app flows
 
-- A mobile-first showcase app for students, alumni and partners
-- Marketplace flows for accommodation, food, careers, events and alumni businesses
-- An AI concierge experience tied to practical campus and community actions
-- Rewards, verification and referral surfaces
-- A lightweight partner studio overlay to demonstrate the commercial model
-- Source product documents:
-  - `UNIZIK Community Hub PRD.md`
-  - `UNIZIK Community Hub Design Guide.md`
+- Onboarding with role selection for student and alumni journeys
+- Home dashboard with quick actions, featured offers and events
+- Explore marketplace for housing, food, career and alumni business offers
+- Zik AI concierge with prompt-driven actions into real product flows
+- Community section for mentors, networking, jobs and chapter-style engagement
+- Wallet and profile area with rewards, verification and saved items
+- Deeper in-app screens for accommodation search, campus map, study planner, deal detail, event calendar, mentor profile, alumni network and redemption
+- Native-style bottom sheet interactions for quick detail and lightweight actions
 
-## Project structure
+## Files
 
-- `index.html` - page structure and app shell
-- `styles.css` - visual system, responsive layout and component styling
-- `app.js` - demo data, interaction logic and screen rendering
+- `index.html` - app shell
+- `styles.css` - visual system and responsive mobile UI
+- `app.js` - state, rendering and interaction logic
+- `UNIZIK Community Hub PRD.md` - product requirements source
+- `UNIZIK Community Hub Design Guide.md` - design principles source
 
 ## Run locally
 
-Because the project is static, you can open `index.html` directly in a browser or serve the folder with any static server.
-
-Simple option with Python:
+Open `index.html` directly in a browser, or serve the repo with a simple static server.
 
 ```bash
 python -m http.server 8000
@@ -31,6 +31,6 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-## Deployment
+## Deploy on Vercel
 
-This repository is ready for a straightforward Vercel static deployment. Point Vercel at the repo root and deploy without a custom build command.
+This is a static front-end app. You can deploy it from the repo root on Vercel without adding a build command.
