@@ -64,7 +64,12 @@ const roles = {
     greeting: "Hi, Adaeze",
     subtitle: "",
     avatar: "AD",
-    pills: ["Engineering", "300 level", "Verified"],
+    nextFocus: {
+      label: "Next class",
+      title: "Machine Design",
+      countdown: "42 min",
+      location: "Engineering LT 2"
+    },
     heroTitle: "Today",
     heroBody: "",
     heroStats: [
@@ -83,7 +88,12 @@ const roles = {
     greeting: "Hi, Chinedu",
     subtitle: "",
     avatar: "CH",
-    pills: ["Class of 2016", "Lagos chapter", "Verified"],
+    nextFocus: {
+      label: "Next session",
+      title: "Founder office hours",
+      countdown: "Today · 16:30",
+      location: "Chapter lounge"
+    },
     heroTitle: "Today",
     heroBody: "",
     heroStats: [
@@ -334,6 +344,7 @@ function renderHeader() {
   }
 
   const subtitle = roleData().subtitle;
+  const focus = roleData().nextFocus;
   root.header.innerHTML = `
     <div class="header-row">
       <div class="header-primary">
@@ -348,7 +359,17 @@ function renderHeader() {
         <button class="icon-button" type="button" data-notifications="true">${icon("bell", "icon-holder")}</button>
       </div>
     </div>
-    <div class="chip-row" style="margin-top: 14px;">${roleData().pills.map((item) => chip(item, "role-chip")).join("")}</div>
+    <button class="schedule-strip" type="button" data-route="study-planner">
+      <div class="schedule-copy">
+        <span class="schedule-label">${focus.label}</span>
+        <strong>${focus.title}</strong>
+        <span class="schedule-location">${focus.location}</span>
+      </div>
+      <div class="schedule-meta">
+        <span class="schedule-countdown">${focus.countdown}</span>
+        <span class="schedule-arrow">${icon("arrow", "mini-icon")}</span>
+      </div>
+    </button>
   `;
 }
 
