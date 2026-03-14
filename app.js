@@ -207,15 +207,13 @@ function avatar(initials, tone = "#0d5c44") {
 
 function renderHeader() {
   if (state.phase === "onboarding") {
-    const step = onboarding[state.onboardingStep];
     root.header.innerHTML = `
       <div class="header-row">
         <div class="header-primary">
           <div class="avatar-sm">VA</div>
-          <div class="header-copy">
-            <p class="eyebrow">Varsity AI</p>
-            <h2>UNIZIK community hub</h2>
-            <p>${step.badge}</p>
+          <div class="onboarding-brand">
+            <strong>Varsity AI</strong>
+            <span>for UNIZIK</span>
           </div>
         </div>
         <button class="icon-button" type="button" data-skip-onboarding="true">${icon("arrow", "icon-holder")}</button>
@@ -282,24 +280,76 @@ function renderTabs() {
 function renderOnboarding() {
   const step = onboarding[state.onboardingStep];
   const finalStep = state.onboardingStep === onboarding.length - 1;
+  const welcomeStep = step.id === "welcome";
 
   return `
     <section class="onboarding-stack">
       <article class="onboarding-card visual">
-        <p class="eyebrow">${step.badge}</p>
-        <h2 style="margin-top: 10px; font-size: 1.42rem; line-height: 1.06;">${step.title}</h2>
-        <p>${step.body}</p>
-        <div class="onboarding-visual">
-          <div class="orb"></div>
-          <div class="float-card">
-            <strong>${state.onboardingStep === 0 ? "Campus + alumni" : state.onboardingStep === 1 ? "Role-aware" : "Trusted access"}</strong>
-            <span>${state.onboardingStep === 0 ? "Utility, offers, connection" : state.onboardingStep === 1 ? "Student and alumni tuned" : "Verification-led experiences"}</span>
-          </div>
-          <div class="signal-card">
-            <strong>${state.onboardingStep === 2 ? "Verified" : "Live"}</strong>
-            <span>${state.onboardingStep === 0 ? "Events, jobs, housing" : state.onboardingStep === 1 ? "Paths change by persona" : "Deals, rewards, chapters"}</span>
-          </div>
-        </div>
+        ${
+          welcomeStep
+            ? `
+              <div class="welcome-hero">
+                <div class="welcome-copy">
+                  <p class="eyebrow">${step.badge}</p>
+                  <h2 class="welcome-title">${step.title}</h2>
+                  <p class="welcome-subtitle">${step.body}</p>
+                </div>
+                <div class="welcome-scene">
+                  <div class="scene-orb"></div>
+                  <div class="scene-orb small"></div>
+                  <div class="scene-phone">
+                    <div class="scene-top">
+                      <span class="scene-pill">Verified</span>
+                      <span class="scene-pill ghost">Live</span>
+                    </div>
+                    <div class="scene-grid">
+                      <div class="scene-card tone-green">
+                        <span>Hostels</span>
+                        <strong>52 rooms</strong>
+                      </div>
+                      <div class="scene-card tone-gold">
+                        <span>Rewards</span>
+                        <strong>2,540 pts</strong>
+                      </div>
+                      <div class="scene-card tone-sky wide">
+                        <span>People</span>
+                        <strong>Mentors + alumni</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="scene-floating scene-floating-a">
+                    <span>Events</span>
+                    <strong>21 Mar</strong>
+                  </div>
+                  <div class="scene-floating scene-floating-b">
+                    <span>Zik AI</span>
+                    <strong>Ask and act</strong>
+                  </div>
+                  <div class="scene-avatars">
+                    <span>AD</span>
+                    <span>IE</span>
+                    <span>TN</span>
+                  </div>
+                </div>
+              </div>
+            `
+            : `
+              <p class="eyebrow">${step.badge}</p>
+              <h2 style="margin-top: 10px; font-size: 1.42rem; line-height: 1.06;">${step.title}</h2>
+              <p>${step.body}</p>
+              <div class="onboarding-visual">
+                <div class="orb"></div>
+                <div class="float-card">
+                  <strong>${state.onboardingStep === 1 ? "Role-aware" : "Trusted access"}</strong>
+                  <span>${state.onboardingStep === 1 ? "Student and alumni tuned" : "Verification-led experiences"}</span>
+                </div>
+                <div class="signal-card">
+                  <strong>${state.onboardingStep === 2 ? "Verified" : "Live"}</strong>
+                  <span>${state.onboardingStep === 1 ? "Paths change by persona" : "Deals, rewards, chapters"}</span>
+                </div>
+              </div>
+            `
+        }
       </article>
 
       ${
@@ -1125,3 +1175,4 @@ document.addEventListener("click", (event) => {
 
 root.sheetCloseIcon.innerHTML = icons.close;
 render();
+
