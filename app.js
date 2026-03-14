@@ -4,166 +4,175 @@
   role: "student",
   tab: "home",
   route: null,
-  sheet: null,
   category: "all",
   prompt: "housing",
 };
 
+const icons = {
+  home: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5 10.5V20h14v-9.5"></path></svg>`,
+  explore: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="m15.5 8.5-2.8 6-4.2 1.6 1.6-4.2z"></path></svg>`,
+  spark: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2 1.8 4.8L20 8.5l-4.2 3.1L17.2 17 13 13.9 8.8 17l1.4-5.4L6 8.5l5.2-1.7z"></path></svg>`,
+  users: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 12.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M15.5 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path><path d="M3.5 19c1.4-2.4 3.5-3.6 6.3-3.6S14.7 16.6 16 19"></path><path d="M14.5 18c.7-1.4 1.9-2.1 3.6-2.1s2.8.7 3.4 2.1"></path></svg>`,
+  wallet: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v2H6.5A2.5 2.5 0 0 0 4 11.5z"></path><path d="M20 9H6.5A2.5 2.5 0 0 0 4 11.5v5A2.5 2.5 0 0 0 6.5 19H20z"></path><circle cx="16.5" cy="14" r="1"></circle></svg>`,
+  bell: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 9.5a4.5 4.5 0 1 1 9 0c0 5 2 6 2 6h-13s2-1 2-6"></path><path d="M10 18.5a2.3 2.3 0 0 0 4 0"></path></svg>`,
+  back: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6.5-6 5.5 6 5.5"></path></svg>`,
+  close: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10"></path><path d="M17 7 7 17"></path></svg>`,
+  arrow: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg>`,
+  hostel: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V8l8-4 8 4v11"></path><path d="M9 19v-5h6v5"></path></svg>`,
+  map: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5 9 4l6 2 5-2v13.5L15 20l-6-2-5 2z"></path><path d="M9 4v14"></path><path d="M15 6v14"></path></svg>`,
+  planner: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="15" rx="2"></rect><path d="M8 2.5v4"></path><path d="M16 2.5v4"></path><path d="M8 10h8"></path><path d="M8 14h5"></path></svg>`,
+  food: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8"></path><path d="M10 3v8"></path><path d="M7 7h3"></path><path d="M8.5 11v10"></path><path d="M15 3c2 2.5 2 6 0 8.5"></path><path d="M15 11.5V21"></path></svg>`,
+  jobs: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="2"></rect><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"></path><path d="M4 12h16"></path></svg>`,
+  mentor: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 19c1.8-2.9 4-4.3 6.5-4.3s4.7 1.4 6.5 4.3"></path></svg>`,
+  gift: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16v9H4z"></path><path d="M12 10v9"></path><path d="M2.5 7.5h19v2.5h-19z"></path><path d="M12 7.5c-1.9 0-3.5-1.1-3.5-2.5S10 2.5 12 7.5Z"></path><path d="M12 7.5c1.9 0 3.5-1.1 3.5-2.5S14 2.5 12 7.5Z"></path></svg>`,
+  verify: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 6 6v5c0 4 2.4 7 6 9 3.6-2 6-5 6-9V6z"></path><path d="m9.5 12 1.7 1.8L15 10"></path></svg>`,
+};
+
 const tabs = [
-  { id: "home", label: "Home", icon: "H" },
-  { id: "explore", label: "Explore", icon: "X" },
-  { id: "ai", label: "Zik AI", icon: "AI" },
-  { id: "community", label: "People", icon: "P" },
-  { id: "wallet", label: "Wallet", icon: "W" },
+  { id: "home", label: "Home", icon: "home" },
+  { id: "explore", label: "Explore", icon: "explore" },
+  { id: "ai", label: "Zik AI", icon: "spark" },
+  { id: "community", label: "People", icon: "users" },
+  { id: "wallet", label: "Wallet", icon: "wallet" },
 ];
 
 const onboarding = [
   {
     id: "welcome",
-    eyebrow: "UNIZIK community hub",
-    title: "One app for campus life, alumni value and everyday support.",
-    body:
-      "Varsity AI brings together trusted campus information, practical student services, alumni connection, offers, rewards and a local AI concierge.",
-    action: "See how it works",
+    title: "A more beautiful way to belong to UNIZIK.",
+    body: "Campus life, alumni access, rewards and AI support in one polished community app.",
+    badge: "Community commerce",
   },
   {
     id: "role",
-    eyebrow: "Personalized from day one",
-    title: "Student and alumni journeys share one product, but not one generic experience.",
-    body:
-      "The app adapts the content mix, actions and commerce moments based on where someone is in the university relationship.",
-    action: "Choose your role",
+    title: "Different journeys. One shared hub.",
+    body: "Students get utility and momentum. Alumni get access, visibility and meaningful ways back in.",
+    badge: "Role-aware",
   },
   {
     id: "verify",
-    eyebrow: "Trust layer",
-    title: "Verification keeps the hub useful, safe and worth opening weekly.",
-    body:
-      "Members can unlock identity-based deals, chapter access, campus services and partner offers after a lightweight verification setup.",
-    action: "Enter app",
+    title: "Verification unlocks trust-led experiences.",
+    body: "Deals, network access, chapters, rewards and support all feel better when the community is real.",
+    badge: "Trusted by design",
   },
 ];
 
 const roles = {
   student: {
     label: "Student mode",
-    title: "Welcome back, Adaeze",
-    subtitle: "You have classes at 11:00, 3 saved offers and a hostel shortlist waiting.",
-    walletTitle: "Campus rewards wallet",
-    persona: "300 level | Engineering | Verified student",
-    homeHero: ["Timetable support", "Hostel search", "Affordable food", "Career launch"],
+    greeting: "Hi, Adaeze",
+    subtitle: "Your week is organized. Your deals and support are close.",
+    avatar: "AD",
+    pills: ["Engineering", "300 level", "Verified"],
+    heroTitle: "Stay ahead of campus life without juggling five apps.",
+    heroBody: "Accommodation, food, planning, events, jobs and AI support all flow through one calm interface.",
+    heroStats: [
+      { value: "3", label: "saved offers" },
+      { value: "11:00", label: "next class" },
+      { value: "180", label: "new points" },
+    ],
+    stories: [
+      { title: "Housing", subtitle: "Verified hostels", icon: "hostel", tone: "#d8f1e2", soft: "#eef9f1" },
+      { title: "Planner", subtitle: "3 tasks ready", icon: "planner", tone: "#f6ead1", soft: "#fff8ea" },
+      { title: "Mentors", subtitle: "2 warm intros", icon: "mentor", tone: "#dce9ff", soft: "#f1f6ff" },
+    ],
   },
   alumni: {
     label: "Alumni mode",
-    title: "Welcome back, Chinedu",
-    subtitle: "Your chapter mixer is on Friday, 2 mentees requested intros and 4 new businesses joined.",
-    walletTitle: "Alumni member wallet",
-    persona: "Class of 2016 | Lagos chapter | Verified alumni",
-    homeHero: ["Mentorship", "Deals near you", "Events and giving", "Business discovery"],
+    greeting: "Hi, Chinedu",
+    subtitle: "Your network, chapter and business visibility are all active.",
+    avatar: "CH",
+    pills: ["Class of 2016", "Lagos chapter", "Verified"],
+    heroTitle: "Reconnect with the university in a way that feels useful.",
+    heroBody: "Discover people, events, businesses and causes through a premium alumni experience, not a noisy feed.",
+    heroStats: [
+      { value: "2", label: "mentor requests" },
+      { value: "4", label: "new listings" },
+      { value: "Fri", label: "chapter mixer" },
+    ],
+    stories: [
+      { title: "Chapters", subtitle: "Lagos active", icon: "users", tone: "#d8f1e2", soft: "#eef9f1" },
+      { title: "Business", subtitle: "4 new offers", icon: "wallet", tone: "#f6ead1", soft: "#fff8ea" },
+      { title: "Mentor", subtitle: "Students waiting", icon: "mentor", tone: "#dce9ff", soft: "#f1f6ff" },
+    ],
   },
 };
 
 const quickActions = [
-  { id: "accommodation", title: "Find hostel", body: "Compare trusted listings near campus.", route: "accommodation" },
-  { id: "ai", title: "Ask Zik AI", body: "Get grounded answers and next actions.", tab: "ai" },
-  { id: "map", title: "Campus map", body: "Find faculties, health services and key points.", route: "campus-map" },
-  { id: "planner", title: "Study planner", body: "Organize classes, deadlines and focus blocks.", route: "study-planner" },
+  { id: "hostel", title: "Hostels", copy: "Near-campus stays", icon: "hostel", route: "accommodation", tone: "#0d5c44" },
+  { id: "map", title: "Campus map", copy: "Find key places", icon: "map", route: "campus-map", tone: "#2a7b72" },
+  { id: "planner", title: "Planner", copy: "Organize the week", icon: "planner", route: "study-planner", tone: "#d6a348" },
+  { id: "ai", title: "Zik AI", copy: "Ask and act", icon: "spark", tab: "ai", tone: "#db6d57" },
 ];
 
 const featuredDeals = [
-  {
-    id: "deal-hostel",
-    title: "Green Court hostel offer",
-    subtitle: "Ifite road | 8 mins from campus | utilities included",
-    badge: "Verified housing",
-    meta: "Save 12% on annual booking",
-    price: "N420,000 per session",
-  },
-  {
-    id: "deal-food",
-    title: "Campus meal pass",
-    subtitle: "5 weekday lunches from partner kitchens",
-    badge: "Student essential",
-    meta: "Earn 180 reward points",
-    price: "N9,500 weekly",
-  },
-  {
-    id: "deal-data",
-    title: "Learning data bundle",
-    subtitle: "Study-friendly MTN plan for research and classes",
-    badge: "Popular this week",
-    meta: "1.8GB extra on first activation",
-    price: "N3,200 monthly",
-  },
+  { id: "deal-hostel", title: "Green Court", copy: "Flexible hostel booking", value: "12% off", meta: "52 rooms left", tone: "#0d5c44", soft: "#dbf2e4", tag: "Verified" },
+  { id: "deal-food", title: "Meal pass", copy: "5 weekday lunches", value: "180 pts", meta: "Student essential", tone: "#d6a348", soft: "#fff0d2", tag: "Popular" },
+  { id: "deal-data", title: "Study data", copy: "Learning bundle", value: "1.8GB extra", meta: "MTN partner", tone: "#2a7b72", soft: "#daf2ee", tag: "Smart spend" },
 ];
 
 const marketplaceDeals = [
-  { id: "deal-hostel", category: "housing", title: "Green Court hostel offer", subtitle: "Female wing, generator, borehole, shuttle stop nearby", badge: "Trusted", meta: "52 rooms left", price: "N420,000 / session" },
-  { id: "deal-lodge", category: "housing", title: "Hillview lodge", subtitle: "Premium self-contained space with study area", badge: "Premium", meta: "Ifite", price: "N610,000 / session" },
-  { id: "deal-food", category: "food", title: "Campus meal pass", subtitle: "Lunch bundles from partner kitchens", badge: "Popular", meta: "5 options", price: "N9,500 / week" },
-  { id: "deal-cafe", category: "food", title: "Library cafe breakfast", subtitle: "Coffee, sandwich and data corner package", badge: "Morning pick", meta: "Main campus", price: "N2,200 / pack" },
-  { id: "deal-jobkit", category: "career", title: "CV review + interview prep", subtitle: "Run by verified alumni recruiters", badge: "Career", meta: "24 mentor slots", price: "N6,000 / session" },
-  { id: "deal-business", category: "business", title: "Alumni business showcase", subtitle: "Weekly placement in the discovery feed", badge: "Growth", meta: "Seen by chapters", price: "N18,000 / week" },
+  { id: "deal-hostel", category: "housing", title: "Green Court hostel", copy: "Female wing, generator, borehole", price: "N420k", meta: "8 mins to campus", tag: "Trusted", tone: "#0d5c44", soft: "#d9f1e4" },
+  { id: "deal-lodge", category: "housing", title: "Hillview lodge", copy: "Premium self-contained stay", price: "N610k", meta: "Ifite corridor", tag: "Premium", tone: "#2a7b72", soft: "#d8efea" },
+  { id: "deal-food", category: "food", title: "Campus meal pass", copy: "5 lunches from partner kitchens", price: "N9.5k", meta: "Weekly plan", tag: "Popular", tone: "#d6a348", soft: "#fff1d8" },
+  { id: "deal-cafe", category: "food", title: "Library breakfast", copy: "Coffee and sandwich combo", price: "N2.2k", meta: "Main campus", tag: "Quick bite", tone: "#db6d57", soft: "#fde4df" },
+  { id: "deal-jobkit", category: "career", title: "CV review", copy: "Interview prep with alumni recruiters", price: "N6k", meta: "24 slots open", tag: "Career", tone: "#4677c9", soft: "#e6efff" },
+  { id: "deal-business", category: "business", title: "Business showcase", copy: "Discovery placement in the alumni feed", price: "N18k", meta: "Seen by chapters", tag: "Growth", tone: "#7d4fd6", soft: "#eee6ff" },
 ];
 
 const prompts = {
   housing: {
-    title: "Find a safe hostel near Engineering with flexible payment.",
-    reply:
-      "I found three verified options near the faculty corridor. Green Court is the best value, Hillview is the most premium and Cedar Annex offers monthly payment support.",
-    sources: ["Verified housing partners", "UNIZIK location map", "Student reviews"],
-    action: "Open accommodation search",
+    title: "Find a safe hostel near Engineering",
+    answer: "Three verified options fit your route. Green Court is the best value, Hillview is the premium pick.",
     route: "accommodation",
+    action: "Open hostels",
   },
   timetable: {
-    title: "Help me organize my classes and reading for this week.",
-    reply:
-      "I grouped your timetable into three focus windows, added a two-hour reading block before Thursday labs and suggested a low-cost lunch option near your afternoon class route.",
-    sources: ["Study planner", "Campus timetable", "Marketplace food partners"],
-    action: "Open study planner",
+    title: "Plan my study week around classes",
+    answer: "I grouped your work into three focus windows and suggested a lighter Thursday before labs.",
     route: "study-planner",
+    action: "Open planner",
   },
   network: {
-    title: "Who can help me connect with media alumni in Lagos?",
-    reply:
-      "Three alumni mentors match your interest. I recommend Ijeoma Okafor for media growth, Tobe Nnadi for product marketing and the Lagos chapter mixer this Friday for warm introductions.",
-    sources: ["Mentor directory", "Chapter events", "Alumni profiles"],
-    action: "Open alumni network",
+    title: "Who can help me connect with media alumni?",
+    answer: "I found three relevant alumni and one chapter mixer this Friday for warmer introductions.",
     route: "alumni-network",
+    action: "Open network",
   },
 };
 
 const events = [
-  { id: "event-mixer", title: "Founder mixer", subtitle: "Startup alumni, final-year builders and partner brands", meta: "Friday 18:00 | Awka civic lounge", badge: "Featured" },
-  { id: "event-health", title: "Health campus career evening", subtitle: "Nnewi-focused mentorship and internship roundtable", meta: "Tuesday 17:30 | Health sciences", badge: "Career" },
-  { id: "event-fair", title: "Community market day", subtitle: "Offers, businesses and local creators across the hub", meta: "Saturday 10:00 | Main campus green", badge: "Commerce" },
+  { id: "event-mixer", title: "Founder mixer", month: "MAR", day: "21", copy: "Builders, alumni and brand partners", meta: "Awka civic lounge", tone: "#0d5c44" },
+  { id: "event-health", title: "Health careers", month: "MAR", day: "24", copy: "Mentorship and internship roundtable", meta: "Nnewi campus", tone: "#2a7b72" },
+  { id: "event-fair", title: "Market day", month: "MAR", day: "29", copy: "Offers, food and community businesses", meta: "Main campus green", tone: "#d6a348" },
 ];
 
 const mentors = [
-  { id: "mentor-ifeoma", title: "Ifeoma Eze", subtitle: "Growth lead at a fintech | Class of 2018", meta: "Mentors product and business students", badge: "Available" },
-  { id: "mentor-uche", title: "Uche Madu", subtitle: "Medical entrepreneur | Lagos chapter", meta: "Supports health and startup pathways", badge: "2 open slots" },
+  { id: "mentor-ifeoma", name: "Ifeoma Eze", initials: "IE", role: "Growth lead", meta: "Product and career mentor", tone: "#0d5c44" },
+  { id: "mentor-uche", name: "Uche Madu", initials: "UM", role: "Health entrepreneur", meta: "Startup and healthcare advice", tone: "#2a7b72" },
+  { id: "mentor-kingsley", name: "Kingsley Obi", initials: "KO", role: "Brand strategist", meta: "Media and growth intros", tone: "#d6a348" },
 ];
 
 const jobs = [
-  { id: "job-growth", title: "Graduate growth analyst", subtitle: "Lagos hybrid | Alumni-founded startup", meta: "Apply by March 28" },
-  { id: "job-content", title: "Community content intern", subtitle: "Awka | Flexible student schedule", meta: "Paid internship" },
-];
-
-const news = [
-  { id: "news-hack", title: "Innovation lab opens maker sprint applications", body: "Students across engineering, arts and business can apply for a 6-week prototype sprint backed by alumni mentors.", badge: "Campus update" },
-  { id: "news-agreement", title: "Support desk updates academic service turnaround", body: "Verification-linked requests now route faster across fees, documentation and official announcements in the hub.", badge: "Service news" },
+  { id: "job-growth", title: "Graduate growth analyst", meta: "Lagos hybrid", copy: "Alumni-founded startup", tone: "#4677c9" },
+  { id: "job-content", title: "Community content intern", meta: "Awka flexible", copy: "Paid student-friendly role", tone: "#db6d57" },
 ];
 
 const connections = [
-  { id: "conn-1", name: "Adaora Nkem", context: "Law | Abuja chapter | Wants to mentor final-year students" },
-  { id: "conn-2", name: "Tobe Nnadi", context: "Media product | Lagos chapter | Open to coffee chats" },
-  { id: "conn-3", name: "Chisom Obi", context: "Architecture | Awka chapter | Hiring junior creatives" },
+  { id: "conn-1", name: "Adaora Nkem", initials: "AN", meta: "Law | Abuja chapter", copy: "Interested in mentoring final-year students", tone: "#0d5c44" },
+  { id: "conn-2", name: "Tobe Nnadi", initials: "TN", meta: "Media product | Lagos", copy: "Open to coffee chats and portfolio feedback", tone: "#2a7b72" },
+  { id: "conn-3", name: "Chisom Obi", initials: "CO", meta: "Architecture | Awka", copy: "Hiring junior creatives this quarter", tone: "#d6a348" },
 ];
 
-const notifications = [
-  { title: "Hostel shortlist updated", body: "Green Court added a new flexible payment option." },
-  { title: "Mentor accepted", body: "Ifeoma Eze accepted your intro request for next Wednesday." },
-  { title: "Reward unlocked", body: "You earned 180 points from the meal pass save." },
+const news = [
+  { title: "Innovation sprint opens", copy: "Students can apply to a 6-week maker sprint backed by alumni mentors.", tag: "Campus" },
+  { title: "Faster support routing", copy: "Verification-linked requests now move quicker across documentation and student services.", tag: "Service" },
+];
+
+const rewards = [
+  { id: "meal", title: "Meal pass", copy: "Use 800 points", tone: "#d6a348" },
+  { id: "event", title: "Event upgrade", copy: "Use 1,200 points", tone: "#0d5c44" },
+  { id: "data", title: "Data bonus", copy: "Use 650 points", tone: "#2a7b72" },
 ];
 
 const root = {
@@ -173,61 +182,43 @@ const root = {
   sheet: document.getElementById("sheet-overlay"),
   sheetTitle: document.getElementById("sheet-title"),
   sheetBody: document.getElementById("sheet-body"),
+  sheetCloseIcon: document.getElementById("sheet-close-icon"),
 };
 
-function role() {
+function icon(name, className = "") {
+  return `<span class="${className}">${icons[name] || ""}</span>`;
+}
+
+function roleData() {
   return roles[state.role];
 }
 
-function titleForTab(tab) {
-  return tabs.find((item) => item.id === tab)?.label || "App";
+function styleVars(item) {
+  return `style="--tone:${item.tone}; --tone-soft:${item.soft || item.tone};"`;
 }
 
-function detailById(collection, id) {
-  return collection.find((item) => item.id === id);
+function chip(text, className = "meta-chip") {
+  return `<span class="${className}">${text}</span>`;
 }
 
-function openSheet(title, body) {
-  state.sheet = { title, body };
-  root.sheetTitle.textContent = title;
-  root.sheetBody.innerHTML = body;
-  root.sheet.classList.remove("hidden");
-  root.sheet.setAttribute("aria-hidden", "false");
-}
-
-function closeSheet() {
-  state.sheet = null;
-  root.sheet.classList.add("hidden");
-  root.sheet.setAttribute("aria-hidden", "true");
-}
-
-function routeMeta(route) {
-  const meta = {
-    accommodation: { title: "Accommodation", subtitle: "Compare trusted student housing" },
-    "campus-map": { title: "Campus map", subtitle: "Navigate the university faster" },
-    "study-planner": { title: "Study planner", subtitle: "Build a lighter week" },
-    "event-calendar": { title: "Events", subtitle: "Community and chapter calendar" },
-    "mentor-profile": { title: "Mentor profile", subtitle: "High-trust alumni connection" },
-    "deal-detail": { title: "Offer detail", subtitle: "Partner commerce flow" },
-    "job-board": { title: "Jobs", subtitle: "Career and business opportunities" },
-    "news-feed": { title: "News feed", subtitle: "Important updates and stories" },
-    "alumni-network": { title: "Alumni network", subtitle: "Context-aware reconnection" },
-    redemption: { title: "Redemption", subtitle: "Use your points" },
-    verification: { title: "Verification", subtitle: "Identity, status and trust" },
-  };
-  return meta[route.id] || { title: titleForTab(state.tab), subtitle: role().label };
+function avatar(initials, tone = "#0d5c44") {
+  return `<div class="avatar-ring" style="background:linear-gradient(135deg, ${tone}, #d6a348)"><span>${initials}</span></div>`;
 }
 
 function renderHeader() {
   if (state.phase === "onboarding") {
+    const step = onboarding[state.onboardingStep];
     root.header.innerHTML = `
       <div class="header-row">
-        <div class="header-copy">
-          <p class="eyebrow">Varsity AI</p>
-          <h2>UNIZIK community hub</h2>
-          <p>App prototype</p>
+        <div class="header-primary">
+          <div class="avatar-sm">VA</div>
+          <div class="header-copy">
+            <p class="eyebrow">Varsity AI</p>
+            <h2>UNIZIK community hub</h2>
+            <p>${step.badge}</p>
+          </div>
         </div>
-        <button class="icon-button" type="button" data-skip-onboarding="true">></button>
+        <button class="icon-button" type="button" data-skip-onboarding="true">${icon("arrow", "icon-holder")}</button>
       </div>
     `;
     return;
@@ -236,13 +227,15 @@ function renderHeader() {
   if (state.route) {
     root.header.innerHTML = `
       <div class="header-row">
-        <button class="back-button" type="button" data-back="true"><</button>
-        <div class="header-copy" style="flex: 1;">
-          <p class="eyebrow">${role().label}</p>
-          <h2>${routeMeta(state.route).title}</h2>
-          <p>${routeMeta(state.route).subtitle}</p>
+        <div class="header-primary">
+          <button class="back-button" type="button" data-back="true">${icon("back", "icon-holder")}</button>
+          <div class="header-copy">
+            <p class="eyebrow">${roleData().label}</p>
+            <h2>${routeTitle(state.route)}</h2>
+            <p>${routeSubtitle(state.route)}</p>
+          </div>
         </div>
-        <button class="icon-button" type="button" data-notifications="true">3</button>
+        <button class="icon-button" type="button" data-notifications="true">${icon("bell", "icon-holder")}</button>
       </div>
     `;
     return;
@@ -250,13 +243,19 @@ function renderHeader() {
 
   root.header.innerHTML = `
     <div class="header-row">
-      <div class="header-copy">
-        <p class="eyebrow">${role().label}</p>
-        <h2>${role().title}</h2>
-        <p>${role().subtitle}</p>
+      <div class="header-primary">
+        <div class="avatar">${roleData().avatar}</div>
+        <div class="header-copy">
+          <p class="eyebrow">${roleData().label}</p>
+          <h2>${roleData().greeting}</h2>
+          <p>${roleData().subtitle}</p>
+        </div>
       </div>
-      <button class="icon-button" type="button" data-notifications="true">3</button>
+      <div class="header-actions">
+        <button class="icon-button" type="button" data-notifications="true">${icon("bell", "icon-holder")}</button>
+      </div>
     </div>
+    <div class="chip-row" style="margin-top: 14px;">${roleData().pills.map((item) => chip(item, "role-chip")).join("")}</div>
   `;
 }
 
@@ -272,7 +271,7 @@ function renderTabs() {
     .map(
       (tab) => `
         <button class="tab-button ${state.tab === tab.id && !state.route ? "active" : ""}" type="button" data-tab="${tab.id}">
-          <span>${tab.icon}</span>
+          ${icon(tab.icon, "nav-icon")}
           <span>${tab.label}</span>
         </button>
       `
@@ -282,59 +281,73 @@ function renderTabs() {
 
 function renderOnboarding() {
   const step = onboarding[state.onboardingStep];
-  const isRoleStep = step.id === "role";
-  const isFinal = state.onboardingStep === onboarding.length - 1;
+  const finalStep = state.onboardingStep === onboarding.length - 1;
 
   return `
     <section class="onboarding-stack">
-      <article class="onboarding-card">
-        <p class="eyebrow">${step.eyebrow}</p>
-        <h2 class="section-title" style="font-size: 1.35rem; margin-top: 8px;">${step.title}</h2>
+      <article class="onboarding-card visual">
+        <p class="eyebrow">${step.badge}</p>
+        <h2 style="margin-top: 10px; font-size: 1.42rem; line-height: 1.06;">${step.title}</h2>
         <p>${step.body}</p>
         <div class="onboarding-visual">
-          <div class="visual-rings"></div>
-          <div class="visual-stack"></div>
-          <div class="visual-dots">${new Array(12).fill("").map(() => "<span></span>").join("")}</div>
+          <div class="orb"></div>
+          <div class="float-card">
+            <strong>${state.onboardingStep === 0 ? "Campus + alumni" : state.onboardingStep === 1 ? "Role-aware" : "Trusted access"}</strong>
+            <span>${state.onboardingStep === 0 ? "Utility, offers, connection" : state.onboardingStep === 1 ? "Student and alumni tuned" : "Verification-led experiences"}</span>
+          </div>
+          <div class="signal-card">
+            <strong>${state.onboardingStep === 2 ? "Verified" : "Live"}</strong>
+            <span>${state.onboardingStep === 0 ? "Events, jobs, housing" : state.onboardingStep === 1 ? "Paths change by persona" : "Deals, rewards, chapters"}</span>
+          </div>
         </div>
       </article>
 
       ${
-        isRoleStep
-          ? `<div class="role-grid">
-              <button class="role-option ${state.role === "student" ? "active" : ""}" type="button" data-role="student">
-                <strong>Student</strong>
-                <span>Campus support, accommodation, study tools, deals and early-career pathways.</span>
+        step.id === "role"
+          ? `<div class="mode-grid">
+              <button class="mode-card ${state.role === "student" ? "active" : ""}" type="button" data-role="student">
+                ${icon("planner", "card-icon large")}
+                <div class="card-title">Student</div>
+                <div class="card-copy">Utility, affordability and momentum.</div>
               </button>
-              <button class="role-option ${state.role === "alumni" ? "active" : ""}" type="button" data-role="alumni">
-                <strong>Alumni</strong>
-                <span>Mentorship, events, business discovery, chapter activity and giving opportunities.</span>
+              <button class="mode-card ${state.role === "alumni" ? "active" : ""}" type="button" data-role="alumni">
+                ${icon("users", "card-icon large")}
+                <div class="card-title">Alumni</div>
+                <div class="card-copy">Network, chapter life and opportunity.</div>
               </button>
             </div>`
           : ""
       }
 
       ${
-        isFinal
-          ? `<article class="section-card">
-              <div class="inline-head">
+        finalStep
+          ? `<article class="panel">
+              <div class="section-head">
                 <div>
-                  <p class="eyebrow">Verification setup</p>
-                  <h3 class="section-title">Ready to unlock the hub</h3>
+                  <p class="eyebrow">Unlocks</p>
+                  <h3 class="section-title">What verification enables</h3>
                 </div>
-                <span class="badge gold">Required</span>
+                ${chip("Required", "badge gold")}
               </div>
-              <div class="list-lines" style="margin-top: 14px;">
-                <div class="list-line"><strong>Identity</strong><span>Student number or alumni record confirmed.</span></div>
-                <div class="list-line"><strong>Consent</strong><span>Commercial preferences and community privacy controls saved.</span></div>
-                <div class="list-line"><strong>Access</strong><span>Verified deals, chapters, mentors and wallet benefits activated.</span></div>
+              <div class="action-grid" style="margin-top: 14px;">
+                <div class="action-card active" style="--tone:#0d5c44;">
+                  ${icon("verify", "card-icon")}
+                  <div class="card-title">Deals</div>
+                  <div class="card-copy">Member pricing and rewards.</div>
+                </div>
+                <div class="action-card" style="--tone:#d6a348;">
+                  ${icon("users", "card-icon")}
+                  <div class="card-title">Network</div>
+                  <div class="card-copy">Mentors, chapters, warm intros.</div>
+                </div>
               </div>
             </article>`
           : ""
       }
 
-      <div class="onboarding-actions">
+      <div class="action-row">
         ${state.onboardingStep > 0 ? `<button class="secondary-button" type="button" data-prev-onboarding="true">Back</button>` : ""}
-        <button class="primary-button" type="button" data-next-onboarding="true">${step.action}</button>
+        <button class="primary-button" type="button" data-next-onboarding="true">${finalStep ? "Enter app" : "Continue"}</button>
       </div>
     </section>
   `;
@@ -343,82 +356,102 @@ function renderOnboarding() {
 function renderHome() {
   return `
     <section class="screen-stack">
-      <article class="hero-card">
-        <p class="eyebrow">This week</p>
-        <h2>${state.role === "student" ? "Useful campus help, not just announcements." : "Reconnect, discover and get practical value."}</h2>
-        <p>${state.role === "student" ? "Your home feed blends timetable support, affordable offers, verified services and the people or places you actually need this week." : "Your home feed surfaces chapter energy, curated opportunities, alumni businesses, mentor pathways and commercial value designed for trusted community members."}</p>
-        <div class="hero-chip-row" style="margin-top: 16px;">${role().homeHero.map((item) => `<span class="hero-chip">${item}</span>`).join("")}</div>
+      <article class="hero-panel">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">Home hub</p>
+            <h2 class="hero-title">${roleData().heroTitle}</h2>
+            <p>${roleData().heroBody}</p>
+            <div class="chip-row" style="margin-top: 16px;">
+              ${roleData().pills.map((item) => chip(item, "story-badge")).join("")}
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="orb"></div>
+            <div class="float-card">
+              <strong>2,540 pts</strong>
+              <span>Wallet ready for rewards</span>
+            </div>
+            <div class="signal-card">
+              <strong>${state.role === "student" ? "11:00" : "Friday"}</strong>
+              <span>${state.role === "student" ? "Faculty class next" : "Lagos chapter mixer"}</span>
+            </div>
+          </div>
+        </div>
+        <div class="metric-row">
+          ${roleData().heroStats.map((item) => `<div class="mini-stat"><strong>${item.value}</strong><span>${item.label}</span></div>`).join("")}
+        </div>
       </article>
+
+      <div class="scroll-row">
+        ${roleData().stories.map((item) => `
+          <button class="story-card" type="button" ${styleVars(item)} ${item.title === "Housing" ? `data-route="accommodation"` : item.title === "Planner" ? `data-route="study-planner"` : `data-route="alumni-network"`}>
+            ${icon(item.icon, "card-icon")}
+            <div class="card-title">${item.title}</div>
+            <div class="card-copy">${item.subtitle}</div>
+          </button>`).join("")}
+      </div>
 
       <section>
         <div class="section-head">
-          <h3 class="section-title">Quick actions</h3>
-          <button class="mini-link" type="button" data-route="news-feed">View news</button>
+          <div>
+            <p class="eyebrow">Quick launch</p>
+            <h3 class="section-title">Move fast</h3>
+          </div>
+          <button class="soft-button" type="button" data-tab="explore">${icon("arrow", "icon-holder")}</button>
         </div>
-        <div class="quick-actions" style="margin-top: 12px;">
-          ${quickActions
-            .map(
-              (item) => `
-                <button class="quick-card" type="button" ${item.route ? `data-route="${item.route}"` : `data-tab-jump="${item.tab}"`}>
-                  <strong>${item.title}</strong>
-                  <span>${item.body}</span>
-                </button>
-              `
-            )
-            .join("")}
+        <div class="action-grid" style="margin-top: 12px;">
+          ${quickActions.map((item, index) => `
+            <button class="action-card ${index === 0 ? "active" : ""}" type="button" style="--tone:${item.tone};" ${item.route ? `data-route="${item.route}"` : `data-tab-jump="${item.tab}"`}>
+              ${icon(item.icon, "card-icon")}
+              <div class="card-title">${item.title}</div>
+              <div class="card-copy">${item.copy}</div>
+            </button>`).join("")}
         </div>
       </section>
 
-      <section class="section-card">
+      <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Curated for you</p>
-            <h3 class="section-title">Featured offers</h3>
+            <p class="eyebrow">Curated offers</p>
+            <h3 class="section-title">Worth opening weekly</h3>
           </div>
-          <button class="mini-link" type="button" data-tab="explore">Open market</button>
+          <button class="soft-button" type="button" data-tab="explore">${icon("explore", "icon-holder")}</button>
         </div>
-        <div class="cards-column" style="margin-top: 14px;">
-          ${featuredDeals
-            .map(
-              (deal) => `
-                <button class="deal-card" type="button" data-route="deal-detail" data-route-id="${deal.id}">
-                  <div class="card-topline">
-                    <span class="badge ${deal.badge.toLowerCase().includes("verified") ? "gold" : ""}">${deal.badge}</span>
-                    <span class="kicker">${deal.meta}</span>
-                  </div>
-                  <h3 style="margin-top: 12px;">${deal.title}</h3>
-                  <span>${deal.subtitle}</span>
-                  <div class="price-pill">${deal.price}</div>
-                </button>
-              `
-            )
-            .join("")}
+        <div class="media-strip" style="margin-top: 12px;">
+          ${featuredDeals.map((item) => `
+            <button class="feature-card" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
+              <div class="media-top">
+                ${chip(item.tag, "tiny-badge")}
+                <div class="media-value" style="margin-top: 16px;">${item.value}</div>
+                <div class="media-badge"><strong>${item.meta}</strong><span>${item.copy}</span></div>
+              </div>
+              <div class="media-info">
+                <div class="card-title">${item.title}</div>
+                <div class="card-copy">${item.copy}</div>
+              </div>
+            </button>`).join("")}
         </div>
       </section>
 
-      <section class="section-card">
+      <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Community pulse</p>
-            <h3 class="section-title">Upcoming events</h3>
+            <p class="eyebrow">Coming up</p>
+            <h3 class="section-title">Events</h3>
           </div>
-          <button class="mini-link" type="button" data-route="event-calendar">Calendar</button>
+          <button class="soft-button" type="button" data-route="event-calendar">${icon("planner", "icon-holder")}</button>
         </div>
-        <div class="cards-column" style="margin-top: 14px;">
-          ${events
-            .map(
-              (event) => `
-                <button class="event-card" type="button" data-sheet-type="event" data-sheet-id="${event.id}">
-                  <div class="badge-row">
-                    <span class="badge">${event.badge}</span>
-                    <span class="kicker">${event.meta}</span>
-                  </div>
-                  <h3 style="margin-top: 12px;">${event.title}</h3>
-                  <span>${event.subtitle}</span>
-                </button>
-              `
-            )
-            .join("")}
+        <div class="card-stack" style="margin-top: 12px;">
+          ${events.slice(0, 2).map((item) => `
+            <button class="event-card" type="button" data-sheet-type="event" data-sheet-id="${item.id}">
+              <div class="row-between">
+                <div class="meta-chip">${item.month} ${item.day}</div>
+                <div class="card-icon" style="--tone:${item.tone};">${icons.spark}</div>
+              </div>
+              <div class="card-title" style="margin-top: 12px;">${item.title}</div>
+              <div class="card-copy">${item.copy}</div>
+            </button>`).join("")}
         </div>
       </section>
     </section>
@@ -426,94 +459,75 @@ function renderHome() {
 }
 
 function renderExplore() {
-  const visibleDeals = state.category === "all" ? marketplaceDeals : marketplaceDeals.filter((deal) => deal.category === state.category);
   const categories = ["all", "housing", "food", "career", "business"];
+  const items = state.category === "all" ? marketplaceDeals : marketplaceDeals.filter((item) => item.category === state.category);
 
   return `
     <section class="screen-stack">
-      <div class="search-shell">
-        <span>Search</span>
-        <input type="text" value="Hostels, food, jobs, businesses" readonly />
-      </div>
-      <div class="filter-row">
-        ${categories
-          .map(
-            (category) => `
-              <button class="filter-chip ${state.category === category ? "active" : ""}" type="button" data-category="${category}">${category === "all" ? "All" : category}</button>
-            `
-          )
-          .join("")}
-      </div>
-      <section class="section-card">
+      <div class="panel">
         <div class="section-head">
           <div>
             <p class="eyebrow">Marketplace</p>
-            <h3 class="section-title">Practical community value</h3>
+            <h3 class="section-title">Curated community value</h3>
           </div>
-          <span class="badge gold">${visibleDeals.length} results</span>
+          ${chip(`${items.length} live`, "badge gold")}
         </div>
-        <div class="cards-column" style="margin-top: 14px;">
-          ${visibleDeals
-            .map(
-              (deal) => `
-                <button class="deal-card" type="button" data-route="deal-detail" data-route-id="${deal.id}">
-                  <div class="badge-row">
-                    <span class="badge ${deal.badge === "Trusted" ? "gold" : ""}">${deal.badge}</span>
-                    <span class="kicker">${deal.meta}</span>
-                  </div>
-                  <h3 style="margin-top: 12px;">${deal.title}</h3>
-                  <span>${deal.subtitle}</span>
-                  <div class="price-pill">${deal.price}</div>
-                </button>
-              `
-            )
-            .join("")}
+        <div class="chip-row" style="margin-top: 14px;">
+          ${categories.map((item) => `<button class="filter-chip ${state.category === item ? "active" : ""}" type="button" data-category="${item}">${item === "all" ? "All" : item}</button>`).join("")}
         </div>
-      </section>
+      </div>
+      <div class="card-stack">
+        ${items.map((item) => `
+          <button class="market-card" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
+            <div class="market-media">
+              ${chip(item.tag, "tiny-badge")}
+              <div class="media-value" style="margin-top: 20px;">${item.price}</div>
+              <div class="media-badge"><strong>${item.meta}</strong><span>${item.category}</span></div>
+            </div>
+            <div class="market-info">
+              <div class="card-title">${item.title}</div>
+              <div class="card-copy">${item.copy}</div>
+              <div class="market-meta">
+                ${chip(item.category, "meta-chip")}
+                ${chip("Saved friendly", "meta-chip ghost")}
+              </div>
+            </div>
+          </button>`).join("")}
+      </div>
     </section>
   `;
 }
 
 function renderAI() {
   const prompt = prompts[state.prompt];
-
   return `
     <section class="screen-stack">
-      <article class="section-card">
-        <div class="inline-head">
+      <article class="ai-panel">
+        <div class="ai-stage">
+          <div class="ai-orb"></div>
           <div>
             <p class="eyebrow">Zik AI concierge</p>
-            <h3 class="section-title">Ask naturally, move quickly</h3>
-          </div>
-          <span class="badge gold">Source-aware</span>
-        </div>
-        <div class="ai-chat" style="margin-top: 14px;">
-          <div class="chat-bubble user">${prompt.title}</div>
-          <div class="chat-bubble assistant">
-            ${prompt.reply}
-            <span>Sources: ${prompt.sources.join(" | ")}</span>
+            <h3 class="section-title" style="margin-top: 6px;">Fast answers with a next step</h3>
+            <div class="chat-bubble user" style="margin-top: 14px;">${prompt.title}</div>
+            <div class="chat-bubble assistant">${prompt.answer}</div>
           </div>
         </div>
       </article>
-
-      <div class="quick-chips">
-        ${Object.entries(prompts)
-          .map(
-            ([key, item]) => `
-              <button class="saved-chip ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}">${item.action}</button>
-            `
-          )
-          .join("")}
+      <div class="chip-row">
+        ${Object.entries(prompts).map(([key, item]) => `<button class="prompt-chip ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}">${item.action}</button>`).join("")}
       </div>
-
-      <article class="ai-response">
-        <strong>${prompt.action}</strong>
-        <span>Each answer leads into an actual product flow, instead of stopping at a text response.</span>
-        <div class="onboarding-actions" style="margin-top: 14px;">
-          <button class="primary-button" type="button" data-route="${prompt.route}">Open action</button>
-          <button class="secondary-button" type="button" data-sheet-type="prompt" data-sheet-id="${state.prompt}">Why this matters</button>
-        </div>
-      </article>
+      <div class="action-grid">
+        <button class="action-card active" type="button" style="--tone:#0d5c44;" data-route="${prompt.route}">
+          ${icon("spark", "card-icon")}
+          <div class="card-title">${prompt.action}</div>
+          <div class="card-copy">Jump straight into the relevant flow.</div>
+        </button>
+        <button class="action-card" type="button" style="--tone:#d6a348;" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
+          ${icon("verify", "card-icon")}
+          <div class="card-title">Why it matters</div>
+          <div class="card-copy">AI is connected to real utilities, not a detached chat toy.</div>
+        </button>
+      </div>
     </section>
   `;
 }
@@ -521,59 +535,59 @@ function renderAI() {
 function renderCommunity() {
   return `
     <section class="screen-stack">
-      <article class="section-card">
+      <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Network</p>
-            <h3 class="section-title">Mentors, chapters and warm intros</h3>
+            <p class="eyebrow">Mentors</p>
+            <h3 class="section-title">People who can move things forward</h3>
           </div>
-          <button class="mini-link" type="button" data-route="alumni-network">Open</button>
+          <button class="soft-button" type="button" data-route="alumni-network">${icon("users", "icon-holder")}</button>
         </div>
-        <div class="cards-column" style="margin-top: 14px;">
-          ${mentors
-            .map(
-              (mentor) => `
-                <button class="person-card" type="button" data-route="mentor-profile" data-route-id="${mentor.id}">
-                  <div class="badge-row">
-                    <span class="badge gold">${mentor.badge}</span>
-                    <span class="kicker">${mentor.meta}</span>
-                  </div>
-                  <h3 style="margin-top: 12px;">${mentor.title}</h3>
-                  <span>${mentor.subtitle}</span>
-                </button>
-              `
-            )
-            .join("")}
+        <div class="card-stack" style="margin-top: 12px;">
+          ${mentors.map((item) => `
+            <button class="person-card" type="button" data-route="mentor-profile" data-route-id="${item.id}">
+              ${avatar(item.initials, item.tone)}
+              <div class="person-info">
+                <div class="card-title">${item.name}</div>
+                <div class="card-copy">${item.role}</div>
+                <div class="person-meta">${chip(item.meta, "meta-chip")}</div>
+              </div>
+              <div class="soft-button">${icon("arrow", "icon-holder")}</div>
+            </button>`).join("")}
         </div>
-      </article>
+      </section>
 
-      <article class="section-card">
+      <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Opportunity layer</p>
-            <h3 class="section-title">Jobs and alumni business</h3>
+            <p class="eyebrow">Opportunity</p>
+            <h3 class="section-title">Jobs and business visibility</h3>
           </div>
-          <button class="mini-link" type="button" data-route="job-board">Board</button>
+          <button class="soft-button" type="button" data-route="job-board">${icon("jobs", "icon-holder")}</button>
         </div>
-        <div class="cards-column" style="margin-top: 14px;">
-          ${jobs
-            .map(
-              (job) => `
-                <button class="feed-card" type="button" data-sheet-type="job" data-sheet-id="${job.id}">
-                  <strong>${job.title}</strong>
-                  <span>${job.subtitle}</span>
-                  <div class="price-pill">${job.meta}</div>
-                </button>
-              `
-            )
-            .join("")}
-          <button class="feed-card" type="button" data-route="deal-detail" data-route-id="deal-business">
-            <strong>Alumni business showcase</strong>
-            <span>Promoted listings, chapter visibility and trusted discovery.</span>
-            <div class="price-pill">Commercial flow</div>
+        <div class="card-stack" style="margin-top: 12px;">
+          ${jobs.map((item) => `
+            <button class="job-card" type="button" ${styleVars({ tone: item.tone, soft: item.tone })} data-sheet-type="job" data-sheet-id="${item.id}">
+              <div class="row-between">
+                <div class="card-icon" style="--tone:${item.tone};">${icons.jobs}</div>
+                ${chip(item.meta, "meta-chip")}
+              </div>
+              <div class="card-title" style="margin-top: 14px;">${item.title}</div>
+              <div class="card-copy">${item.copy}</div>
+            </button>`).join("")}
+          <button class="market-card" type="button" style="--tone:#7d4fd6; --tone-soft:#efe6ff;" data-route="deal-detail" data-route-id="deal-business">
+            <div class="market-media">
+              ${chip("Growth", "tiny-badge")}
+              <div class="media-value" style="margin-top: 20px;">Brand reach</div>
+              <div class="media-badge"><strong>Alumni business</strong><span>Commercial visibility</span></div>
+            </div>
+            <div class="market-info">
+              <div class="card-title">Business showcase</div>
+              <div class="card-copy">A premium placement inside the verified community feed.</div>
+            </div>
           </button>
         </div>
-      </article>
+      </section>
     </section>
   `;
 }
@@ -582,91 +596,135 @@ function renderWallet() {
   return `
     <section class="screen-stack">
       <article class="wallet-card">
-        <p class="eyebrow">${role().walletTitle}</p>
-        <h2>${role().persona}</h2>
+        <p class="eyebrow">${state.role === "student" ? "Campus wallet" : "Member wallet"}</p>
         <div class="wallet-balance">2,540 pts</div>
-        <p>Rewards from saves, bookings, referrals, events and community participation.</p>
-        <div class="reward-grid" style="margin-top: 14px;">
-          <button class="reward-option" type="button" data-route="redemption">
-            <strong>Redeem now</strong>
-            <span>Use points on meal passes, events and partner bundles.</span>
-          </button>
-          <button class="reward-option" type="button" data-route="verification">
-            <strong>Verification</strong>
-            <span>Manage access, status and trust controls.</span>
-          </button>
+        <p class="body-copy">Reward points from saves, redemptions, events and referrals.</p>
+        <div class="metric-row">
+          <div class="mini-stat"><strong>N3,200</strong><span>saved this month</span></div>
+          <div class="mini-stat"><strong>4</strong><span>offers shortlisted</span></div>
         </div>
       </article>
 
-      <article class="section-card">
+      <div class="reward-grid">
+        <button class="action-card active" type="button" style="--tone:#d6a348;" data-route="redemption">
+          ${icon("gift", "card-icon")}
+          <div class="card-title">Redeem</div>
+          <div class="card-copy">Use points on meals, data and event access.</div>
+        </button>
+        <button class="action-card" type="button" style="--tone:#0d5c44;" data-route="verification">
+          ${icon("verify", "card-icon")}
+          <div class="card-title">Verification</div>
+          <div class="card-copy">Identity, consent and trusted access.</div>
+        </button>
+      </div>
+
+      <section class="panel">
         <div class="section-head">
           <div>
             <p class="eyebrow">Saved</p>
             <h3 class="section-title">Your shortlist</h3>
           </div>
-          <button class="mini-link" type="button" data-tab="explore">Browse more</button>
         </div>
-        <div class="saved-row" style="margin-top: 12px;">
+        <div class="saved-strip" style="margin-top: 14px;">
           <button class="saved-chip active" type="button" data-route="deal-detail" data-route-id="deal-hostel">Hostel</button>
           <button class="saved-chip" type="button" data-route="mentor-profile" data-route-id="mentor-ifeoma">Mentor</button>
           <button class="saved-chip" type="button" data-route="event-calendar">Events</button>
           <button class="saved-chip" type="button" data-route="job-board">Jobs</button>
         </div>
-      </article>
+      </section>
 
-      <article class="section-card">
+      <section class="panel">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Profile</p>
-            <h3 class="section-title">Mode and preferences</h3>
+            <p class="eyebrow">Mode</p>
+            <h3 class="section-title">Experience settings</h3>
           </div>
         </div>
-        <div class="segmented" style="margin-top: 14px;">
-          <button class="${state.role === "student" ? "active" : ""}" type="button" data-role="student">Student</button>
-          <button class="${state.role === "alumni" ? "active" : ""}" type="button" data-role="alumni">Alumni</button>
+        <div class="chip-row" style="margin-top: 14px;">
+          <button class="role-chip ${state.role === "student" ? "active" : ""}" type="button" data-role="student">Student</button>
+          <button class="role-chip ${state.role === "alumni" ? "active" : ""}" type="button" data-role="alumni">Alumni</button>
         </div>
-        <div class="settings-list" style="margin-top: 14px;">
-          <button class="setting-row" type="button" data-sheet-type="settings" data-sheet-id="privacy"><strong>Privacy and consent</strong><span>Commercial controls, notifications, visibility</span></button>
-          <button class="setting-row" type="button" data-sheet-type="settings" data-sheet-id="identity"><strong>Identity and faculty tags</strong><span>Verification, chapter links, trust state</span></button>
-          <button class="setting-row" type="button" data-sheet-type="settings" data-sheet-id="support"><strong>Support center</strong><span>Payments, verification help, partner support</span></button>
-        </div>
-      </article>
+      </section>
     </section>
   `;
 }
 
+function routeTitle(route) {
+  const names = {
+    accommodation: "Accommodation",
+    "campus-map": "Campus map",
+    "study-planner": "Study planner",
+    "event-calendar": "Events",
+    "mentor-profile": "Mentor",
+    "deal-detail": "Offer detail",
+    "job-board": "Jobs",
+    "alumni-network": "Alumni network",
+    redemption: "Redemption",
+    verification: "Verification",
+  };
+  return names[route.id] || "Detail";
+}
+
+function routeSubtitle(route) {
+  const names = {
+    accommodation: "Verified housing flow",
+    "campus-map": "Key places and context",
+    "study-planner": "Organize the week visually",
+    "event-calendar": "Community dates and chapters",
+    "mentor-profile": "High-trust connection",
+    "deal-detail": "Curated partner offer",
+    "job-board": "Career and business opportunities",
+    "alumni-network": "Context-aware reconnection",
+    redemption: "Points and perks",
+    verification: "Identity and access",
+  };
+  return names[route.id] || roleData().label;
+}
+
+function routeDeal(id) {
+  return [...featuredDeals, ...marketplaceDeals].find((item) => item.id === id) || featuredDeals[0];
+}
+
 function renderRoute() {
+  if (!state.route) return "";
   const route = state.route;
-  if (!route) return "";
 
   if (route.id === "accommodation") {
     return `
       <section class="route-stack">
         <article class="route-hero">
-          <p class="eyebrow">Verified student housing</p>
-          <h2>Find a place that fits your budget, route and comfort level.</h2>
-          <p>The demo combines partner listings, trust signals, map context and student-friendly payment structures.</p>
+          <div class="route-layout">
+            <div class="route-copy">
+              <p class="eyebrow">Hostel finder</p>
+              <h2>Trusted places near the parts of campus that matter most.</h2>
+              <p>Filter by route, utilities and payment style without leaving the app.</p>
+            </div>
+            <div class="route-visual">
+              <div class="orb"></div>
+              <div class="float-card"><strong>52 rooms</strong><span>Verified this week</span></div>
+              <div class="signal-card"><strong>Ifite</strong><span>Most active corridor</span></div>
+            </div>
+          </div>
         </article>
-        <div class="inline-search"><span>Near</span><input type="text" value="Engineering faculty, transport route, water, power" readonly /></div>
-        <div class="filter-row">
-          <button class="filter-chip active" type="button">Women only</button>
-          <button class="filter-chip" type="button">Flexible payment</button>
-          <button class="filter-chip" type="button">Verified review</button>
+        <div class="chip-row">
+          <span class="filter-chip active">Women only</span>
+          <span class="filter-chip">Flexible pay</span>
+          <span class="filter-chip">Water + power</span>
         </div>
-        <div class="cards-column">
-          ${marketplaceDeals
-            .filter((deal) => deal.category === "housing")
-            .map(
-              (deal) => `
-                <button class="deal-card" type="button" data-route="deal-detail" data-route-id="${deal.id}">
-                  <strong>${deal.title}</strong>
-                  <span>${deal.subtitle}</span>
-                  <div class="badge-row" style="margin-top: 12px;"><span class="badge gold">${deal.badge}</span><span class="kicker">${deal.meta}</span></div>
-                  <div class="price-pill">${deal.price}</div>
-                </button>
-              `
-            )
-            .join("")}
+        <div class="card-stack">
+          ${marketplaceDeals.filter((item) => item.category === "housing").map((item) => `
+            <button class="market-card" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
+              <div class="market-media">
+                ${chip(item.tag, "tiny-badge")}
+                <div class="media-value" style="margin-top: 20px;">${item.price}</div>
+                <div class="media-badge"><strong>${item.meta}</strong><span>Near campus</span></div>
+              </div>
+              <div class="market-info">
+                <div class="card-title">${item.title}</div>
+                <div class="card-copy">${item.copy}</div>
+                <div class="market-meta">${chip("Map linked")}${chip("Reviews", "meta-chip ghost")}</div>
+              </div>
+            </button>`).join("")}
         </div>
       </section>
     `;
@@ -675,25 +733,24 @@ function renderRoute() {
   if (route.id === "campus-map") {
     return `
       <section class="route-stack">
-        <article class="map-card">
+        <article class="map-panel">
           <p class="eyebrow">Main campus</p>
-          <h3 class="section-title" style="margin-top: 8px;">Essential places in one view</h3>
-          <p>Quick access to faculties, health services, event spaces, partner offers and student help points.</p>
-          <div class="map-grid" style="margin-top: 16px;">
-            <div class="map-line" style="left: 12%; top: 20%; width: 68%; height: 12px;"></div>
-            <div class="map-line" style="left: 30%; top: 44%; width: 12px; height: 44%;"></div>
-            <div class="map-line" style="left: 20%; top: 62%; width: 56%; height: 12px;"></div>
-            <div class="map-pin" style="left: 20%; top: 18%;"></div>
-            <div class="map-pin" style="left: 62%; top: 26%;"></div>
-            <div class="map-pin" style="left: 48%; top: 58%;"></div>
-            <div class="map-pin" style="left: 72%; top: 66%;"></div>
+          <h3 class="section-title" style="margin-top: 8px;">Visual navigation, not static lists</h3>
+          <div class="map-stage">
+            <div class="map-line" style="left: 14%; top: 18%; width: 64%; height: 12px;"></div>
+            <div class="map-line" style="left: 30%; top: 38%; width: 12px; height: 44%;"></div>
+            <div class="map-line" style="left: 18%; top: 62%; width: 58%; height: 12px;"></div>
+            <div class="map-node" style="left: 20%; top: 16%;"></div>
+            <div class="map-node" style="left: 58%; top: 18%;"></div>
+            <div class="map-node" style="left: 42%; top: 56%;"></div>
+            <div class="map-node" style="left: 70%; top: 64%;"></div>
           </div>
         </article>
-        <article class="section-card">
-          <div class="connection-list">
-            <div class="connection-row"><strong>Engineering corridor</strong><span>Closest food and hostel offers nearby</span></div>
-            <div class="connection-row"><strong>Student support desk</strong><span>Verification and documentation help</span></div>
-            <div class="connection-row"><strong>Community green</strong><span>Saturday market day and mixer events</span></div>
+        <article class="route-card">
+          <div class="market-meta">
+            ${chip("Engineering")}
+            ${chip("Support desk", "meta-chip ghost")}
+            ${chip("Food zone", "meta-chip ghost")}
           </div>
         </article>
       </section>
@@ -703,26 +760,32 @@ function renderRoute() {
   if (route.id === "study-planner") {
     return `
       <section class="route-stack">
-        <article class="route-card">
-          <p class="eyebrow">This week</p>
-          <h3 class="section-title" style="margin-top: 8px;">Balanced around your class load</h3>
-          <div class="week-strip" style="margin-top: 16px;">
-            <span class="week-pill active">Mon</span>
-            <span class="week-pill">Tue</span>
-            <span class="week-pill">Wed</span>
-            <span class="week-pill">Thu</span>
-            <span class="week-pill">Fri</span>
-          </div>
-          <div class="list-lines" style="margin-top: 14px;">
-            <div class="list-line"><strong>08:00 - 10:00</strong><span>Deep work block for Mechanics.</span></div>
-            <div class="list-line"><strong>11:00 - 13:00</strong><span>Faculty classes and campus movement window.</span></div>
-            <div class="list-line"><strong>17:00 - 18:00</strong><span>Review lab notes with AI-generated prompts.</span></div>
+        <article class="route-hero">
+          <div class="route-layout">
+            <div class="route-copy">
+              <p class="eyebrow">Weekly rhythm</p>
+              <h2>A calmer visual plan for classes, focus blocks and deadlines.</h2>
+              <p>Structured enough to be useful, light enough to open often.</p>
+            </div>
+            <div class="route-visual">
+              <div class="float-card"><strong>76%</strong><span>Week already mapped</span></div>
+              <div class="signal-card"><strong>Thu</strong><span>Light schedule before labs</span></div>
+            </div>
           </div>
         </article>
+        <div class="chip-row">
+          <span class="day-chip active">Mon</span>
+          <span class="day-chip">Tue</span>
+          <span class="day-chip">Wed</span>
+          <span class="day-chip">Thu</span>
+          <span class="day-chip">Fri</span>
+        </div>
         <article class="route-card">
-          <strong>Weekly progress</strong>
-          <span>Three of four major deadlines already broken into manageable sessions.</span>
-          <div class="progress-bar" style="margin-top: 14px;"><div class="progress-fill" style="width: 76%;"></div></div>
+          <div class="card-stack">
+            <div class="row-between"><strong>08:00 - 10:00</strong><span class="note-copy">Mechanics deep work</span></div>
+            <div class="row-between"><strong>11:00 - 13:00</strong><span class="note-copy">Faculty classes</span></div>
+            <div class="row-between"><strong>17:00 - 18:00</strong><span class="note-copy">AI review session</span></div>
+          </div>
         </article>
       </section>
     `;
@@ -731,64 +794,62 @@ function renderRoute() {
   if (route.id === "event-calendar") {
     return `
       <section class="route-stack">
-        <article class="calendar-card">
+        <article class="calendar-panel">
           <p class="eyebrow">March</p>
-          <h3 class="section-title" style="margin-top: 8px;">Community calendar</h3>
-          <div class="calendar-grid" style="margin-top: 16px;">
-            ${Array.from({ length: 28 }, (_, i) => `<div class="day-cell ${[8, 14, 21, 26].includes(i + 1) ? "marked" : ""}">${i + 1}</div>`).join("")}
+          <h3 class="section-title" style="margin-top: 8px;">Events calendar</h3>
+          <div class="calendar-grid">
+            ${Array.from({ length: 28 }, (_, index) => `<div class="day-box ${[8, 14, 21, 24, 29].includes(index + 1) ? "active" : ""}">${index + 1}</div>`).join("")}
           </div>
         </article>
-        <article class="section-card">
-          <div class="cards-column">
-            ${events.map((event) => `<button class="event-card" type="button" data-sheet-type="event" data-sheet-id="${event.id}"><strong>${event.title}</strong><span>${event.subtitle}</span><div class="price-pill">${event.meta}</div></button>`).join("")}
-          </div>
-        </article>
+        <div class="card-stack">
+          ${events.map((item) => `<button class="event-card" type="button" data-sheet-type="event" data-sheet-id="${item.id}"><div class="row-between"><div class="meta-chip">${item.month} ${item.day}</div>${chip(item.meta, "meta-chip ghost")}</div><div class="card-title" style="margin-top: 12px;">${item.title}</div><div class="card-copy">${item.copy}</div></button>`).join("")}
+        </div>
       </section>
     `;
   }
 
   if (route.id === "mentor-profile") {
-    const mentor = detailById(mentors, route.ref) || mentors[0];
+    const person = mentors.find((item) => item.id === route.ref) || mentors[0];
     return `
       <section class="route-stack">
         <article class="route-hero">
-          <p class="eyebrow">Mentor</p>
-          <h2>${mentor.title}</h2>
-          <p>${mentor.subtitle}. ${mentor.meta}.</p>
+          <div class="route-layout">
+            <div class="route-copy">
+              <p class="eyebrow">Mentor profile</p>
+              <h2>${person.name}</h2>
+              <p>${person.role}. ${person.meta}.</p>
+            </div>
+            <div class="route-visual" style="display:flex; align-items:center; justify-content:center;">${avatar(person.initials, person.tone)}</div>
+          </div>
         </article>
         <article class="route-card">
-          <strong>What they can help with</strong>
-          <span>Career transitions, interview prep, product thinking, networking and realistic growth advice.</span>
-          <div class="tag-row" style="margin-top: 14px;"><span class="tag">Career</span><span class="tag">Mentorship</span><span class="tag">Warm intro</span></div>
-        </article>
-        <article class="route-card">
-          <strong>Availability</strong>
-          <span>Two 30-minute slots open next week. First conversation requests are routed through the hub.</span>
-          <div class="onboarding-actions" style="margin-top: 14px;"><button class="primary-button" type="button" data-sheet-type="mentor" data-sheet-id="${mentor.id}">Request intro</button></div>
+          <div class="market-meta">${chip("Career")}${chip("Warm intros", "meta-chip ghost")}${chip("Video call", "meta-chip ghost")}</div>
+          <div class="action-row"><button class="primary-button" type="button" data-sheet-type="mentor" data-sheet-id="${person.id}">Request intro</button></div>
         </article>
       </section>
     `;
   }
 
   if (route.id === "deal-detail") {
-    const deal = detailById([...featuredDeals, ...marketplaceDeals], route.ref) || featuredDeals[0];
+    const item = routeDeal(route.ref);
     return `
       <section class="route-stack">
-        <article class="route-hero">
-          <p class="eyebrow">Partner offer</p>
-          <h2>${deal.title}</h2>
-          <p>${deal.subtitle}</p>
-          <div class="hero-chip-row" style="margin-top: 16px;"><span class="hero-chip">${deal.badge || "Curated"}</span><span class="hero-chip">${deal.meta || "Community value"}</span></div>
+        <article class="route-hero" ${styleVars(item)}>
+          <div class="route-layout">
+            <div class="route-copy">
+              <p class="eyebrow">Offer detail</p>
+              <h2>${item.title}</h2>
+              <p>${item.copy || item.meta}</p>
+            </div>
+            <div class="route-visual">
+              <div class="float-card"><strong>${item.value || item.price}</strong><span>${item.tag}</span></div>
+              <div class="signal-card"><strong>${item.meta}</strong><span>Curated for the community</span></div>
+            </div>
+          </div>
         </article>
         <article class="route-card">
-          <strong>Why it fits the hub</strong>
-          <span>The university gets a commercial participation model, members get negotiated value and partners get trusted access to a defined community segment.</span>
-          <div class="price-pill">${deal.price || "See offer"}</div>
-        </article>
-        <article class="route-card">
-          <strong>Redemption path</strong>
-          <span>Members can save, redeem, contact the partner or unlock the offer with wallet points and verified status.</span>
-          <div class="onboarding-actions" style="margin-top: 14px;"><button class="primary-button" type="button" data-route="redemption">Redeem</button><button class="secondary-button" type="button" data-sheet-type="deal" data-sheet-id="${deal.id}">Save detail</button></div>
+          <div class="market-meta">${chip(item.tag || "Curated")}${chip("Saved friendly", "meta-chip ghost")}${chip("Wallet ready", "meta-chip ghost")}</div>
+          <div class="action-row"><button class="primary-button" type="button" data-route="redemption">Redeem</button><button class="secondary-button" type="button" data-sheet-type="deal" data-sheet-id="${item.id}">Save</button></div>
         </article>
       </section>
     `;
@@ -797,21 +858,7 @@ function renderRoute() {
   if (route.id === "job-board") {
     return `
       <section class="route-stack">
-        <article class="route-card">
-          <p class="eyebrow">Career board</p>
-          <h3 class="section-title" style="margin-top: 8px;">Verified opportunities from the community</h3>
-          <div class="cards-column" style="margin-top: 14px;">
-            ${jobs.map((job) => `<button class="feed-card" type="button" data-sheet-type="job" data-sheet-id="${job.id}"><strong>${job.title}</strong><span>${job.subtitle}</span><div class="price-pill">${job.meta}</div></button>`).join("")}
-          </div>
-        </article>
-      </section>
-    `;
-  }
-
-  if (route.id === "news-feed") {
-    return `
-      <section class="route-stack">
-        ${news.map((item) => `<article class="feed-card"><div class="badge-row"><span class="badge gold">${item.badge}</span></div><h3 style="margin-top: 12px;">${item.title}</h3><p>${item.body}</p></article>`).join("")}
+        ${jobs.map((item) => `<article class="job-card"><div class="row-between"><div class="card-icon" style="--tone:${item.tone};">${icons.jobs}</div>${chip(item.meta)}</div><div class="card-title" style="margin-top: 12px;">${item.title}</div><div class="card-copy">${item.copy}</div></article>`).join("")}
       </section>
     `;
   }
@@ -820,15 +867,21 @@ function renderRoute() {
     return `
       <section class="route-stack">
         <article class="route-hero">
-          <p class="eyebrow">People graph</p>
-          <h2>Reconnect through shared context, not noise.</h2>
-          <p>Filter by faculty, city, graduating class, industry and chapter activity to get introductions that feel useful.</p>
-        </article>
-        <article class="section-card">
-          <div class="connection-list">
-            ${connections.map((item) => `<button class="connection-row" type="button" data-sheet-type="connection" data-sheet-id="${item.id}"><strong>${item.name}</strong><span>${item.context}</span></button>`).join("")}
+          <div class="route-layout">
+            <div class="route-copy">
+              <p class="eyebrow">People graph</p>
+              <h2>Reconnect through shared context, not noise.</h2>
+              <p>Filter by city, chapter, faculty and industry for warmer intros.</p>
+            </div>
+            <div class="route-visual">
+              <div class="float-card"><strong>42</strong><span>relevant alumni nearby</span></div>
+              <div class="signal-card"><strong>Lagos</strong><span>Most active chapter</span></div>
+            </div>
           </div>
         </article>
+        <div class="card-stack">
+          ${connections.map((item) => `<button class="connection-card" type="button" data-sheet-type="connection" data-sheet-id="${item.id}">${avatar(item.initials, item.tone)}<div><div class="card-title">${item.name}</div><div class="card-copy">${item.meta}</div></div><div class="soft-button">${icon("arrow", "icon-holder")}</div></button>`).join("")}
+        </div>
       </section>
     `;
   }
@@ -837,12 +890,10 @@ function renderRoute() {
     return `
       <section class="route-stack">
         <article class="route-card">
-          <p class="eyebrow">Redeem rewards</p>
-          <h3 class="section-title" style="margin-top: 8px;">2,540 points available</h3>
-          <div class="cards-column" style="margin-top: 14px;">
-            <button class="reward-card" type="button" data-sheet-type="reward" data-sheet-id="meal"><strong>Meal pass discount</strong><span>Use 800 points to reduce your weekly lunch bundle.</span></button>
-            <button class="reward-card" type="button" data-sheet-type="reward" data-sheet-id="event"><strong>Event access upgrade</strong><span>Use 1,200 points for premium seating and networking access.</span></button>
-            <button class="reward-card" type="button" data-sheet-type="reward" data-sheet-id="data"><strong>Study data top-up</strong><span>Use 650 points for a learning data bonus.</span></button>
+          <p class="eyebrow">Rewards</p>
+          <h3 class="section-title" style="margin-top: 8px;">Use your points beautifully</h3>
+          <div class="card-stack" style="margin-top: 14px;">
+            ${rewards.map((item) => `<button class="feature-card" type="button" style="--tone:${item.tone}; --tone-soft:${item.tone};" data-sheet-type="reward" data-sheet-id="${item.id}"><div class="media-top"><div class="media-value">${item.copy}</div><div class="media-badge"><strong>${item.title}</strong><span>Redeem instantly</span></div></div></button>`).join("")}
           </div>
         </article>
       </section>
@@ -853,12 +904,12 @@ function renderRoute() {
     return `
       <section class="route-stack">
         <article class="route-card">
-          <p class="eyebrow">Verification state</p>
-          <h3 class="section-title" style="margin-top: 8px;">Verified and active</h3>
-          <div class="checklist" style="margin-top: 14px;">
-            <div class="list-line"><strong>Identity matched</strong><span>Student or alumni record confirmed.</span></div>
-            <div class="list-line"><strong>Faculty and chapter tags</strong><span>Used for relevance and trust controls.</span></div>
-            <div class="list-line"><strong>Consent saved</strong><span>Commercial, privacy and notification settings available.</span></div>
+          <p class="eyebrow">Verification</p>
+          <h3 class="section-title" style="margin-top: 8px;">Trusted and active</h3>
+          <div class="card-stack" style="margin-top: 14px;">
+            <div class="row-between"><strong>Identity</strong>${chip("Matched")}</div>
+            <div class="row-between"><strong>Faculty and chapter tags</strong>${chip("Synced", "meta-chip ghost")}</div>
+            <div class="row-between"><strong>Consent settings</strong>${chip("Saved", "meta-chip ghost")}</div>
           </div>
         </article>
       </section>
@@ -869,74 +920,63 @@ function renderRoute() {
 }
 
 function sheetPayload(type, id) {
+  if (type === "notifications") {
+    return {
+      title: "Notifications",
+      body: `<div class="sheet-stack">${news.map((item) => `<article class="sheet-panel"><div class="feed-head"><strong>${item.title}</strong>${chip(item.tag)}</div><div class="card-copy">${item.copy}</div></article>`).join("")}</div>`,
+    };
+  }
+
   if (type === "prompt") {
     return {
-      title: "Why AI is central",
-      body: `<article class="section-card"><strong>Actionable AI</strong><span>The assistant is designed to bridge into real product flows like housing, planning, mentors and marketplace actions instead of acting like a standalone chat novelty.</span></article>`,
+      title: "Why this feels better",
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>Action after answer</strong><div class="card-copy">Zik AI routes members into actual app flows like hostels, planning and network discovery.</div></article></div>`,
     };
   }
 
   if (type === "event") {
-    const event = detailById(events, id);
+    const item = events.find((entry) => entry.id === id) || events[0];
     return {
-      title: event.title,
-      body: `<article class="section-card"><strong>${event.subtitle}</strong><span>${event.meta}</span></article><article class="section-card"><strong>Why attend</strong><span>This event connects community, commerce and belonging in one touchpoint, which is core to the hub model.</span></article>`,
+      title: item.title,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><div class="feed-head">${chip(`${item.month} ${item.day}`, "badge gold")} ${chip(item.meta, "meta-chip ghost")}</div><div class="card-copy" style="margin-top:10px;">${item.copy}</div></article></div>`,
     };
   }
 
   if (type === "job") {
-    const job = detailById(jobs, id);
+    const item = jobs.find((entry) => entry.id === id) || jobs[0];
     return {
-      title: job.title,
-      body: `<article class="section-card"><strong>${job.subtitle}</strong><span>${job.meta}</span></article><article class="section-card"><strong>Why this belongs in the hub</strong><span>Opportunities become more trusted and relevant when they are routed through the verified university community.</span></article>`,
+      title: item.title,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.meta}</strong><div class="card-copy">${item.copy}</div></article></div>`,
     };
   }
 
   if (type === "mentor") {
-    const mentor = detailById(mentors, id);
+    const item = mentors.find((entry) => entry.id === id) || mentors[0];
     return {
-      title: "Request intro",
-      body: `<article class="section-card"><strong>${mentor.title}</strong><span>${mentor.subtitle}</span></article><article class="section-card"><strong>Next step</strong><span>The first intro is routed through the platform so both mentor and member have context and trust before sharing direct contact.</span><div class="sheet-actions"><button class="primary-button" type="button">Send request</button></div></article>`,
+      title: `Request intro to ${item.name}`,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.role}</strong><div class="card-copy">The first contact stays inside the platform so the introduction feels safe and contextual.</div></article><button class="primary-button" type="button">Send request</button></div>`,
     };
   }
 
   if (type === "reward") {
+    const item = rewards.find((entry) => entry.id === id) || rewards[0];
     return {
-      title: "Reward ready",
-      body: `<article class="section-card"><strong>Redemption flow</strong><span>Your selection would confirm points, show remaining balance and generate a partner-ready code inside the wallet.</span><div class="sheet-actions"><button class="primary-button" type="button">Confirm redemption</button></div></article>`,
-    };
-  }
-
-  if (type === "settings") {
-    const copy = {
-      privacy: "Members can control visibility, notifications and which commercial categories they want to hear from.",
-      identity: "Faculty, year and alumni chapter context make the app more useful while preserving trust and consent.",
-      support: "Escalation paths exist for payments, verification issues and partner disputes.",
-    };
-    return {
-      title: "Settings detail",
-      body: `<article class="section-card"><strong>${id}</strong><span>${copy[id]}</span></article>`,
+      title: item.title,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.copy}</strong><div class="card-copy">Redeem and receive a partner-ready code in your wallet immediately.</div></article><button class="primary-button" type="button">Confirm</button></div>`,
     };
   }
 
   if (type === "connection") {
-    const person = detailById(connections, id);
+    const item = connections.find((entry) => entry.id === id) || connections[0];
     return {
-      title: person.name,
-      body: `<article class="section-card"><strong>${person.context}</strong><span>This intro can be made through chapter context, shared faculty history or event attendance.</span><div class="sheet-actions"><button class="primary-button" type="button">Request connection</button></div></article>`,
-    };
-  }
-
-  if (type === "deal") {
-    return {
-      title: "Saved to wallet",
-      body: `<article class="section-card"><strong>Offer saved</strong><span>The app can keep a short list of offers, notify on changes and route redemption without forcing the member to start over each time.</span></article>`,
+      title: item.name,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.meta}</strong><div class="card-copy">${item.copy}</div></article><button class="primary-button" type="button">Request connection</button></div>`,
     };
   }
 
   return {
-    title: "Notifications",
-    body: notifications.map((item) => `<article class="section-card"><strong>${item.title}</strong><span>${item.body}</span></article>`).join(""),
+    title: "Saved",
+    body: `<div class="sheet-stack"><article class="sheet-panel"><strong>Saved to your wallet</strong><div class="card-copy">This offer can now be revisited, redeemed or shared at the right moment.</div></article></div>`,
   };
 }
 
@@ -951,7 +991,7 @@ function renderMain() {
     return;
   }
 
-  const screens = {
+  const renderers = {
     home: renderHome,
     explore: renderExplore,
     ai: renderAI,
@@ -959,13 +999,25 @@ function renderMain() {
     wallet: renderWallet,
   };
 
-  root.main.innerHTML = screens[state.tab]();
+  root.main.innerHTML = renderers[state.tab]();
 }
 
 function render() {
   renderHeader();
   renderTabs();
   renderMain();
+}
+
+function openSheet(payload) {
+  root.sheetTitle.textContent = payload.title;
+  root.sheetBody.innerHTML = payload.body;
+  root.sheet.classList.remove("hidden");
+  root.sheet.setAttribute("aria-hidden", "false");
+}
+
+function closeSheet() {
+  root.sheet.classList.add("hidden");
+  root.sheet.setAttribute("aria-hidden", "true");
 }
 
 function nextOnboarding() {
@@ -1055,15 +1107,13 @@ document.addEventListener("click", (event) => {
 
   const notificationsButton = event.target.closest("[data-notifications]");
   if (notificationsButton) {
-    const payload = sheetPayload("notifications", "all");
-    openSheet(payload.title, payload.body);
+    openSheet(sheetPayload("notifications", "all"));
     return;
   }
 
   const sheetButton = event.target.closest("[data-sheet-type]");
   if (sheetButton) {
-    const payload = sheetPayload(sheetButton.dataset.sheetType, sheetButton.dataset.sheetId);
-    openSheet(payload.title, payload.body);
+    openSheet(sheetPayload(sheetButton.dataset.sheetType, sheetButton.dataset.sheetId));
     return;
   }
 
@@ -1073,4 +1123,5 @@ document.addEventListener("click", (event) => {
   }
 });
 
+root.sheetCloseIcon.innerHTML = icons.close;
 render();

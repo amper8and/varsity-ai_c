@@ -6,9 +6,9 @@
     <title>Varsity AI | UNIZIK Community Hub</title>
     <meta
       name="description"
-      content="A mobile-first demo app for the UNIZIK community hub, combining campus utility, AI assistance, commerce, alumni connection and rewards."
+      content="A rich mobile demo app for the UNIZIK community hub, designed around campus utility, alumni connection, AI support and curated commerce."
     />
-    <meta name="theme-color" content="#0f5a43" />
+    <meta name="theme-color" content="#0d5c44" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,6 +20,7 @@
   <body>
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
 
     <div class="app-shell">
       <div class="device-frame">
@@ -49,7 +50,9 @@
             <p class="eyebrow">Quick detail</p>
             <h3 id="sheet-title">Detail</h3>
           </div>
-          <button class="icon-button subtle" type="button" data-close-sheet="true" aria-label="Close sheet">X</button>
+          <button class="icon-button subtle" type="button" data-close-sheet="true" aria-label="Close sheet">
+            <span class="icon-holder" id="sheet-close-icon"></span>
+          </button>
         </div>
         <div class="sheet-body" id="sheet-body"></div>
       </div>
