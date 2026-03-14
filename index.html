@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Varsity AI | UNIZIK Community Hub Demo</title>
+    <meta
+      name="description"
+      content="A polished demo of the Varsity AI community hub for UNIZIK, combining campus utility, AI assistance, deals, community and alumni engagement."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="page-shell">
+      <aside class="story-panel">
+        <div class="brand-lockup">
+          <div class="brand-mark">VA</div>
+          <div>
+            <p class="eyebrow">AIM x UNIZIK demo experience</p>
+            <h1>Varsity AI</h1>
+            <p class="lede">
+              A mobile-first community hub designed to turn campus life, alumni affinity and partner value into one seamless product.
+            </p>
+          </div>
+        </div>
+
+        <section class="panel-block">
+          <div class="section-heading">
+            <span class="eyebrow">What this demo covers</span>
+            <h2>PRD-driven product map</h2>
+          </div>
+          <div class="pill-grid" id="screen-map"></div>
+        </section>
+
+        <section class="panel-block metrics-block">
+          <div class="section-heading">
+            <span class="eyebrow">Showcase goals</span>
+            <h2>Value on one screen</h2>
+          </div>
+          <div class="metric-grid" id="metric-grid"></div>
+        </section>
+
+        <section class="panel-block">
+          <div class="section-heading">
+            <span class="eyebrow">Design direction</span>
+            <h2>Modern, trusted, locally proud</h2>
+          </div>
+          <ul class="principle-list">
+            <li>Institutional trust expressed through clean structure, verified states and calm green-led surfaces.</li>
+            <li>Commerce feels curated, not ad-heavy, with practical daily value for students and alumni.</li>
+            <li>AI is useful and grounded in campus context, not treated as a gimmick.</li>
+            <li>The interface keeps a premium editorial tone while staying fast and usable on mobile.</li>
+          </ul>
+        </section>
+
+        <section class="panel-block timeline-block">
+          <div class="section-heading">
+            <span class="eyebrow">Included flows</span>
+            <h2>From onboarding to wallet</h2>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </section>
+      </aside>
+
+      <main class="experience-panel">
+        <header class="experience-header">
+          <div>
+            <p class="eyebrow">Interactive prototype</p>
+            <h2>UNIZIK Community Hub</h2>
+          </div>
+          <div class="header-actions">
+            <button class="ghost-button" id="admin-toggle" type="button">Open partner studio</button>
+            <a class="primary-button" href="./UNIZIK Community Hub PRD.md" target="_blank" rel="noreferrer">View PRD</a>
+          </div>
+        </header>
+
+        <section class="experience-stage">
+          <div class="device-column">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="status-row">
+                  <span>10:28</span>
+                  <span>5G</span>
+                </div>
+
+                <div class="app-header">
+                  <div>
+                    <p class="eyebrow" id="role-label">Student mode</p>
+                    <h3 id="screen-title">Home hub</h3>
+                  </div>
+                  <button class="icon-button" id="notification-button" type="button" aria-label="Open notifications">4</button>
+                </div>
+
+                <div class="role-switch" id="role-switch"></div>
+
+                <div class="screen-content" id="screen-content"></div>
+
+                <nav class="bottom-nav" id="bottom-nav" aria-label="Primary navigation"></nav>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-column">
+            <section class="insight-card hero-card">
+              <div class="hero-card-copy">
+                <span class="eyebrow">North star</span>
+                <h3>Useful every week, not just at admission time</h3>
+                <p>
+                  This demo combines the mockup flows into one coherent app: onboarding, verified identity, marketplace, AI concierge, events, alumni networking, accommodation, jobs, rewards and partner monetization.
+                </p>
+              </div>
+              <div class="hero-chip-stack">
+                <span>Verified identity</span>
+                <span>Campus utility</span>
+                <span>AI concierge</span>
+                <span>Deals and marketplace</span>
+                <span>Community and careers</span>
+              </div>
+            </section>
+
+            <section class="insight-card selected-card" id="selected-card">
+              <div class="card-header-inline">
+                <div>
+                  <span class="eyebrow">Selected detail</span>
+                  <h3 id="selected-title">Choose a card in the phone demo</h3>
+                </div>
+                <button class="text-button hidden" id="detail-close" type="button">Clear</button>
+              </div>
+              <div id="selected-body" class="selected-body">
+                <p>Tap deals, prompts, mentors, events, accommodation or jobs to inspect the richer product surface here.</p>
+              </div>
+            </section>
+
+            <section class="insight-card studio-preview">
+              <div class="section-heading compact">
+                <span class="eyebrow">Admin MVP</span>
+                <h3>Partner and campaign visibility</h3>
+              </div>
+              <div class="studio-stats" id="studio-stats"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <section class="overlay hidden" id="detail-sheet" aria-hidden="true">
+      <div class="overlay-backdrop" data-close-overlay="detail-sheet"></div>
+      <div class="sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <div>
+            <p class="eyebrow">Action detail</p>
+            <h3 id="sheet-title">Detail</h3>
+          </div>
+          <button class="icon-button muted" data-close-overlay="detail-sheet" type="button" aria-label="Close detail">X</button>
+        </div>
+        <div class="sheet-body" id="sheet-body"></div>
+      </div>
+    </section>
+
+    <section class="overlay hidden" id="notifications-sheet" aria-hidden="true">
+      <div class="overlay-backdrop" data-close-overlay="notifications-sheet"></div>
+      <div class="sheet compact-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <div>
+            <p class="eyebrow">Live activity</p>
+            <h3>Notifications</h3>
+          </div>
+          <button class="icon-button muted" data-close-overlay="notifications-sheet" type="button" aria-label="Close notifications">X</button>
+        </div>
+        <div class="sheet-body" id="notifications-body"></div>
+      </div>
+    </section>
+
+    <section class="overlay hidden" id="studio-sheet" aria-hidden="true">
+      <div class="overlay-backdrop" data-close-overlay="studio-sheet"></div>
+      <div class="sheet studio-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <div>
+            <p class="eyebrow">Partner studio</p>
+            <h3>Commercial and admin console</h3>
+          </div>
+          <button class="icon-button muted" data-close-overlay="studio-sheet" type="button" aria-label="Close partner studio">X</button>
+        </div>
+        <div class="sheet-body" id="studio-body"></div>
+      </div>
+    </section>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
