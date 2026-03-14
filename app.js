@@ -39,21 +39,21 @@ const tabs = [
 const onboarding = [
   {
     id: "welcome",
-    title: "A more beautiful way to belong to UNIZIK.",
-    body: "Campus life, alumni access, rewards and AI support in one polished community app.",
-    badge: "Community commerce",
+    title: "Welcome",
+    body: "Choose how you use Varsity AI.",
+    badge: "Get started",
   },
   {
     id: "role",
-    title: "Different journeys. One shared hub.",
-    body: "Students get utility and momentum. Alumni get access, visibility and meaningful ways back in.",
-    badge: "Role-aware",
+    title: "Select role",
+    body: "Student or alumni.",
+    badge: "Personalize",
   },
   {
     id: "verify",
-    title: "Verification unlocks trust-led experiences.",
-    body: "Deals, network access, chapters, rewards and support all feel better when the community is real.",
-    badge: "Trusted by design",
+    title: "Verify access",
+    body: "Confirm identity to unlock deals, rewards and network access.",
+    badge: "Secure access",
   },
 ];
 
@@ -61,11 +61,11 @@ const roles = {
   student: {
     label: "Student mode",
     greeting: "Hi, Adaeze",
-    subtitle: "Your week is organized. Your deals and support are close.",
+    subtitle: "Your week is organized.",
     avatar: "AD",
     pills: ["Engineering", "300 level", "Verified"],
-    heroTitle: "Stay ahead of campus life without juggling five apps.",
-    heroBody: "Accommodation, food, planning, events, jobs and AI support all flow through one calm interface.",
+    heroTitle: "Today",
+    heroBody: "",
     heroStats: [
       { value: "3", label: "saved offers" },
       { value: "11:00", label: "next class" },
@@ -80,11 +80,11 @@ const roles = {
   alumni: {
     label: "Alumni mode",
     greeting: "Hi, Chinedu",
-    subtitle: "Your network, chapter and business visibility are all active.",
+    subtitle: "Your network is active.",
     avatar: "CH",
     pills: ["Class of 2016", "Lagos chapter", "Verified"],
-    heroTitle: "Reconnect with the university in a way that feels useful.",
-    heroBody: "Discover people, events, businesses and causes through a premium alumni experience, not a noisy feed.",
+    heroTitle: "Today",
+    heroBody: "",
     heroStats: [
       { value: "2", label: "mentor requests" },
       { value: "4", label: "new listings" },
@@ -406,56 +406,50 @@ function renderOnboarding() {
 function renderHome() {
   return `
     <section class="screen-stack">
-      <article class="hero-panel">
-        <div class="hero-layout">
-          <div class="hero-copy">
-            <p class="eyebrow">Home hub</p>
-            <h2 class="hero-title">${roleData().heroTitle}</h2>
-            <p>${roleData().heroBody}</p>
-            <div class="chip-row" style="margin-top: 16px;">
+      <article class="hero-panel home-hero-panel">
+        <div class="hero-layout compact">
+          <div class="hero-copy compact">
+            <p class="eyebrow">Today</p>
+            <h2 class="hero-title compact">${state.role === "student" ? "Campus" : "Alumni"}</h2>
+            <div class="chip-row" style="margin-top: 14px;">
               ${roleData().pills.map((item) => chip(item, "story-badge")).join("")}
             </div>
           </div>
-          <div class="hero-visual">
-            <div class="orb"></div>
-            <div class="float-card">
-              <strong>2,540 pts</strong>
-              <span>Wallet ready for rewards</span>
-            </div>
-            <div class="signal-card">
-              <strong>${state.role === "student" ? "11:00" : "Friday"}</strong>
-              <span>${state.role === "student" ? "Faculty class next" : "Lagos chapter mixer"}</span>
+          <div class="hero-visual poster-visual">
+            <div class="poster-stack">
+              <div class="poster-card poster-primary">
+                <span>${state.role === "student" ? "Next" : "Upcoming"}</span>
+                <strong>${state.role === "student" ? "11:00 class" : "Fri mixer"}</strong>
+              </div>
+              <div class="poster-card poster-secondary">
+                <span>Wallet</span>
+                <strong>2,540 pts</strong>
+              </div>
+              <div class="poster-card poster-tertiary">
+                <span>${state.role === "student" ? "Hostels" : "Network"}</span>
+                <strong>${state.role === "student" ? "52 live" : "42 nearby"}</strong>
+              </div>
             </div>
           </div>
         </div>
-        <div class="metric-row">
-          ${roleData().heroStats.map((item) => `<div class="mini-stat"><strong>${item.value}</strong><span>${item.label}</span></div>`).join("")}
+        <div class="metric-row visual-metric-row">
+          ${roleData().heroStats.map((item) => `<div class="mini-stat glass"><strong>${item.value}</strong><span>${item.label}</span></div>`).join("")}
         </div>
       </article>
 
-      <div class="scroll-row">
-        ${roleData().stories.map((item) => `
-          <button class="story-card" type="button" ${styleVars(item)} ${item.title === "Housing" ? `data-route="accommodation"` : item.title === "Planner" ? `data-route="study-planner"` : `data-route="alumni-network"`}>
-            ${icon(item.icon, "card-icon")}
-            <div class="card-title">${item.title}</div>
-            <div class="card-copy">${item.subtitle}</div>
-          </button>`).join("")}
-      </div>
-
       <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Quick launch</p>
-            <h3 class="section-title">Move fast</h3>
+            <p class="eyebrow">Shortcuts</p>
+            <h3 class="section-title">Quick access</h3>
           </div>
-          <button class="soft-button" type="button" data-tab="explore">${icon("arrow", "icon-holder")}</button>
         </div>
-        <div class="action-grid" style="margin-top: 12px;">
-          ${quickActions.map((item, index) => `
-            <button class="action-card ${index === 0 ? "active" : ""}" type="button" style="--tone:${item.tone};" ${item.route ? `data-route="${item.route}"` : `data-tab-jump="${item.tab}"`}>
-              ${icon(item.icon, "card-icon")}
-              <div class="card-title">${item.title}</div>
-              <div class="card-copy">${item.copy}</div>
+        <div class="quick-action-rail" style="margin-top: 12px;">
+          ${quickActions.map((item) => `
+            <button class="quick-visual-card" type="button" style="--tone:${item.tone};" ${item.route ? `data-route="${item.route}"` : `data-tab-jump="${item.tab}"`}>
+              <div class="quick-visual-icon">${icons[item.icon]}</div>
+              <div class="quick-visual-art"></div>
+              <div class="quick-visual-label">${item.title}</div>
             </button>`).join("")}
         </div>
       </section>
@@ -463,22 +457,22 @@ function renderHome() {
       <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Curated offers</p>
-            <h3 class="section-title">Worth opening weekly</h3>
+            <p class="eyebrow">Offers</p>
+            <h3 class="section-title">Saved for you</h3>
           </div>
           <button class="soft-button" type="button" data-tab="explore">${icon("explore", "icon-holder")}</button>
         </div>
-        <div class="media-strip" style="margin-top: 12px;">
+        <div class="poster-strip" style="margin-top: 12px;">
           ${featuredDeals.map((item) => `
-            <button class="feature-card" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
-              <div class="media-top">
+            <button class="offer-poster" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
+              <div class="offer-poster-media">
                 ${chip(item.tag, "tiny-badge")}
-                <div class="media-value" style="margin-top: 16px;">${item.value}</div>
-                <div class="media-badge"><strong>${item.meta}</strong><span>${item.copy}</span></div>
+                <div class="offer-value">${item.value}</div>
+                <div class="offer-mini-chip">${item.meta}</div>
               </div>
-              <div class="media-info">
-                <div class="card-title">${item.title}</div>
-                <div class="card-copy">${item.copy}</div>
+              <div class="offer-poster-footer">
+                <strong>${item.title}</strong>
+                <span>${item.copy}</span>
               </div>
             </button>`).join("")}
         </div>
@@ -487,20 +481,23 @@ function renderHome() {
       <section>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Coming up</p>
-            <h3 class="section-title">Events</h3>
+            <p class="eyebrow">Events</p>
+            <h3 class="section-title">Coming up</h3>
           </div>
           <button class="soft-button" type="button" data-route="event-calendar">${icon("planner", "icon-holder")}</button>
         </div>
-        <div class="card-stack" style="margin-top: 12px;">
+        <div class="event-tile-stack" style="margin-top: 12px;">
           ${events.slice(0, 2).map((item) => `
-            <button class="event-card" type="button" data-sheet-type="event" data-sheet-id="${item.id}">
-              <div class="row-between">
-                <div class="meta-chip">${item.month} ${item.day}</div>
-                <div class="card-icon" style="--tone:${item.tone};">${icons.spark}</div>
+            <button class="event-poster" type="button" style="--tone:${item.tone};" data-sheet-type="event" data-sheet-id="${item.id}">
+              <div class="event-date-badge">
+                <span>${item.month}</span>
+                <strong>${item.day}</strong>
               </div>
-              <div class="card-title" style="margin-top: 12px;">${item.title}</div>
-              <div class="card-copy">${item.copy}</div>
+              <div class="event-poster-copy">
+                <strong>${item.title}</strong>
+                <span>${item.meta}</span>
+              </div>
+              <div class="event-poster-mark">${icons.spark}</div>
             </button>`).join("")}
         </div>
       </section>
@@ -514,33 +511,29 @@ function renderExplore() {
 
   return `
     <section class="screen-stack">
-      <div class="panel">
+      <div class="panel compact-panel">
         <div class="section-head">
           <div>
             <p class="eyebrow">Marketplace</p>
-            <h3 class="section-title">Curated community value</h3>
+            <h3 class="section-title">Browse</h3>
           </div>
-          ${chip(`${items.length} live`, "badge gold")}
+          ${chip(`${items.length}`, "badge gold")}
         </div>
-        <div class="chip-row" style="margin-top: 14px;">
+        <div class="chip-row" style="margin-top: 12px;">
           ${categories.map((item) => `<button class="filter-chip ${state.category === item ? "active" : ""}" type="button" data-category="${item}">${item === "all" ? "All" : item}</button>`).join("")}
         </div>
       </div>
-      <div class="card-stack">
+      <div class="market-grid-media">
         ${items.map((item) => `
-          <button class="market-card" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
-            <div class="market-media">
+          <button class="market-poster" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
+            <div class="market-poster-visual">
               ${chip(item.tag, "tiny-badge")}
-              <div class="media-value" style="margin-top: 20px;">${item.price}</div>
-              <div class="media-badge"><strong>${item.meta}</strong><span>${item.category}</span></div>
+              <div class="market-poster-price">${item.price}</div>
+              <div class="market-poster-art"></div>
             </div>
-            <div class="market-info">
-              <div class="card-title">${item.title}</div>
-              <div class="card-copy">${item.copy}</div>
-              <div class="market-meta">
-                ${chip(item.category, "meta-chip")}
-                ${chip("Saved friendly", "meta-chip ghost")}
-              </div>
+            <div class="market-poster-copy">
+              <strong>${item.title}</strong>
+              <span>${item.meta}</span>
             </div>
           </button>`).join("")}
       </div>
@@ -552,30 +545,32 @@ function renderAI() {
   const prompt = prompts[state.prompt];
   return `
     <section class="screen-stack">
-      <article class="ai-panel">
-        <div class="ai-stage">
-          <div class="ai-orb"></div>
-          <div>
-            <p class="eyebrow">Zik AI concierge</p>
-            <h3 class="section-title" style="margin-top: 6px;">Fast answers with a next step</h3>
-            <div class="chat-bubble user" style="margin-top: 14px;">${prompt.title}</div>
-            <div class="chat-bubble assistant">${prompt.answer}</div>
+      <article class="ai-panel visual-ai-panel">
+        <div class="ai-stage visual">
+          <div class="ai-orb large"></div>
+          <div class="ai-visual-card">
+            <p class="eyebrow">Zik AI</p>
+            <h3 class="section-title">${prompt.action}</h3>
+            <div class="chat-bubble user compact" style="margin-top: 12px;">${prompt.title}</div>
+            <div class="ai-answer-chips">
+              <span>${prompt.answer.split('.')[0]}</span>
+            </div>
           </div>
         </div>
       </article>
-      <div class="chip-row">
-        ${Object.entries(prompts).map(([key, item]) => `<button class="prompt-chip ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}">${item.action}</button>`).join("")}
+      <div class="ai-prompt-grid">
+        ${Object.entries(prompts).map(([key, item]) => `<button class="prompt-visual ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}"><span>${item.action}</span></button>`).join("")}
       </div>
-      <div class="action-grid">
-        <button class="action-card active" type="button" style="--tone:#0d5c44;" data-route="${prompt.route}">
-          ${icon("spark", "card-icon")}
-          <div class="card-title">${prompt.action}</div>
-          <div class="card-copy">Jump straight into the relevant flow.</div>
+      <div class="quick-action-rail two-up">
+        <button class="quick-visual-card active" type="button" style="--tone:#0d5c44;" data-route="${prompt.route}">
+          <div class="quick-visual-icon">${icons.spark}</div>
+          <div class="quick-visual-art"></div>
+          <div class="quick-visual-label">Open</div>
         </button>
-        <button class="action-card" type="button" style="--tone:#d6a348;" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
-          ${icon("verify", "card-icon")}
-          <div class="card-title">Why it matters</div>
-          <div class="card-copy">AI is connected to real utilities, not a detached chat toy.</div>
+        <button class="quick-visual-card" type="button" style="--tone:#d6a348;" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
+          <div class="quick-visual-icon">${icons.verify}</div>
+          <div class="quick-visual-art"></div>
+          <div class="quick-visual-label">Details</div>
         </button>
       </div>
     </section>
@@ -589,20 +584,16 @@ function renderCommunity() {
         <div class="section-head">
           <div>
             <p class="eyebrow">Mentors</p>
-            <h3 class="section-title">People who can move things forward</h3>
+            <h3 class="section-title">People</h3>
           </div>
           <button class="soft-button" type="button" data-route="alumni-network">${icon("users", "icon-holder")}</button>
         </div>
-        <div class="card-stack" style="margin-top: 12px;">
+        <div class="mentor-visual-row" style="margin-top: 12px;">
           ${mentors.map((item) => `
-            <button class="person-card" type="button" data-route="mentor-profile" data-route-id="${item.id}">
+            <button class="mentor-visual-card" type="button" style="--tone:${item.tone};" data-route="mentor-profile" data-route-id="${item.id}">
               ${avatar(item.initials, item.tone)}
-              <div class="person-info">
-                <div class="card-title">${item.name}</div>
-                <div class="card-copy">${item.role}</div>
-                <div class="person-meta">${chip(item.meta, "meta-chip")}</div>
-              </div>
-              <div class="soft-button">${icon("arrow", "icon-holder")}</div>
+              <strong>${item.name}</strong>
+              <span>${item.role}</span>
             </button>`).join("")}
         </div>
       </section>
@@ -611,29 +602,31 @@ function renderCommunity() {
         <div class="section-head">
           <div>
             <p class="eyebrow">Opportunity</p>
-            <h3 class="section-title">Jobs and business visibility</h3>
+            <h3 class="section-title">Open now</h3>
           </div>
-          <button class="soft-button" type="button" data-route="job-board">${icon("jobs", "icon-holder")}</button>
         </div>
-        <div class="card-stack" style="margin-top: 12px;">
+        <div class="market-grid-media" style="margin-top: 12px;">
           ${jobs.map((item) => `
-            <button class="job-card" type="button" ${styleVars({ tone: item.tone, soft: item.tone })} data-sheet-type="job" data-sheet-id="${item.id}">
-              <div class="row-between">
-                <div class="card-icon" style="--tone:${item.tone};">${icons.jobs}</div>
-                ${chip(item.meta, "meta-chip")}
+            <button class="market-poster job-poster" type="button" style="--tone:${item.tone}; --tone-soft:${item.tone};" data-sheet-type="job" data-sheet-id="${item.id}">
+              <div class="market-poster-visual">
+                ${chip(item.meta, "tiny-badge")}
+                <div class="market-poster-price">Open</div>
+                <div class="market-poster-art"></div>
               </div>
-              <div class="card-title" style="margin-top: 14px;">${item.title}</div>
-              <div class="card-copy">${item.copy}</div>
+              <div class="market-poster-copy">
+                <strong>${item.title}</strong>
+                <span>${item.meta}</span>
+              </div>
             </button>`).join("")}
-          <button class="market-card" type="button" style="--tone:#7d4fd6; --tone-soft:#efe6ff;" data-route="deal-detail" data-route-id="deal-business">
-            <div class="market-media">
+          <button class="market-poster business-poster" type="button" style="--tone:#7d4fd6; --tone-soft:#efe6ff;" data-route="deal-detail" data-route-id="deal-business">
+            <div class="market-poster-visual">
               ${chip("Growth", "tiny-badge")}
-              <div class="media-value" style="margin-top: 20px;">Brand reach</div>
-              <div class="media-badge"><strong>Alumni business</strong><span>Commercial visibility</span></div>
+              <div class="market-poster-price">Reach</div>
+              <div class="market-poster-art"></div>
             </div>
-            <div class="market-info">
-              <div class="card-title">Business showcase</div>
-              <div class="card-copy">A premium placement inside the verified community feed.</div>
+            <div class="market-poster-copy">
+              <strong>Business showcase</strong>
+              <span>Alumni placement</span>
             </div>
           </button>
         </div>
@@ -645,54 +638,43 @@ function renderCommunity() {
 function renderWallet() {
   return `
     <section class="screen-stack">
-      <article class="wallet-card">
-        <p class="eyebrow">${state.role === "student" ? "Campus wallet" : "Member wallet"}</p>
+      <article class="wallet-card rich-wallet-card">
+        <div class="wallet-topline">
+          <p class="eyebrow">${state.role === "student" ? "Campus wallet" : "Member wallet"}</p>
+          ${chip("Verified", "tiny-badge")}
+        </div>
         <div class="wallet-balance">2,540 pts</div>
-        <p class="body-copy">Reward points from saves, redemptions, events and referrals.</p>
-        <div class="metric-row">
-          <div class="mini-stat"><strong>N3,200</strong><span>saved this month</span></div>
-          <div class="mini-stat"><strong>4</strong><span>offers shortlisted</span></div>
+        <div class="wallet-visual-grid">
+          <div class="wallet-mini-card"><span>Saved</span><strong>N3,200</strong></div>
+          <div class="wallet-mini-card"><span>Live</span><strong>4 items</strong></div>
         </div>
       </article>
 
-      <div class="reward-grid">
-        <button class="action-card active" type="button" style="--tone:#d6a348;" data-route="redemption">
-          ${icon("gift", "card-icon")}
-          <div class="card-title">Redeem</div>
-          <div class="card-copy">Use points on meals, data and event access.</div>
+      <div class="quick-action-rail two-up">
+        <button class="quick-visual-card active" type="button" style="--tone:#d6a348;" data-route="redemption">
+          <div class="quick-visual-icon">${icons.gift}</div>
+          <div class="quick-visual-art"></div>
+          <div class="quick-visual-label">Redeem</div>
         </button>
-        <button class="action-card" type="button" style="--tone:#0d5c44;" data-route="verification">
-          ${icon("verify", "card-icon")}
-          <div class="card-title">Verification</div>
-          <div class="card-copy">Identity, consent and trusted access.</div>
+        <button class="quick-visual-card" type="button" style="--tone:#0d5c44;" data-route="verification">
+          <div class="quick-visual-icon">${icons.verify}</div>
+          <div class="quick-visual-art"></div>
+          <div class="quick-visual-label">Verify</div>
         </button>
       </div>
 
-      <section class="panel">
+      <section class="panel compact-panel">
         <div class="section-head">
           <div>
             <p class="eyebrow">Saved</p>
-            <h3 class="section-title">Your shortlist</h3>
+            <h3 class="section-title">Shortlist</h3>
           </div>
         </div>
-        <div class="saved-strip" style="margin-top: 14px;">
+        <div class="saved-strip" style="margin-top: 12px;">
           <button class="saved-chip active" type="button" data-route="deal-detail" data-route-id="deal-hostel">Hostel</button>
           <button class="saved-chip" type="button" data-route="mentor-profile" data-route-id="mentor-ifeoma">Mentor</button>
           <button class="saved-chip" type="button" data-route="event-calendar">Events</button>
           <button class="saved-chip" type="button" data-route="job-board">Jobs</button>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Mode</p>
-            <h3 class="section-title">Experience settings</h3>
-          </div>
-        </div>
-        <div class="chip-row" style="margin-top: 14px;">
-          <button class="role-chip ${state.role === "student" ? "active" : ""}" type="button" data-role="student">Student</button>
-          <button class="role-chip ${state.role === "alumni" ? "active" : ""}" type="button" data-role="alumni">Alumni</button>
         </div>
       </section>
     </section>
@@ -747,7 +729,7 @@ function renderRoute() {
             <div class="route-copy">
               <p class="eyebrow">Hostel finder</p>
               <h2>Trusted places near the parts of campus that matter most.</h2>
-              <p>Filter by route, utilities and payment style without leaving the app.</p>
+              <p>Ifite corridor</p>
             </div>
             <div class="route-visual">
               <div class="orb"></div>
@@ -784,8 +766,8 @@ function renderRoute() {
     return `
       <section class="route-stack">
         <article class="map-panel">
-          <p class="eyebrow">Main campus</p>
-          <h3 class="section-title" style="margin-top: 8px;">Visual navigation, not static lists</h3>
+          <p class="eyebrow">Map</p>
+          <h3 class="section-title" style="margin-top: 8px;">Main campus</h3>
           <div class="map-stage">
             <div class="map-line" style="left: 14%; top: 18%; width: 64%; height: 12px;"></div>
             <div class="map-line" style="left: 30%; top: 38%; width: 12px; height: 44%;"></div>
@@ -815,7 +797,7 @@ function renderRoute() {
             <div class="route-copy">
               <p class="eyebrow">Weekly rhythm</p>
               <h2>A calmer visual plan for classes, focus blocks and deadlines.</h2>
-              <p>Structured enough to be useful, light enough to open often.</p>
+              <p>Mon to Fri</p>
             </div>
             <div class="route-visual">
               <div class="float-card"><strong>76%</strong><span>Week already mapped</span></div>
@@ -867,7 +849,7 @@ function renderRoute() {
             <div class="route-copy">
               <p class="eyebrow">Mentor profile</p>
               <h2>${person.name}</h2>
-              <p>${person.role}. ${person.meta}.</p>
+              <p>${person.role}</p>
             </div>
             <div class="route-visual" style="display:flex; align-items:center; justify-content:center;">${avatar(person.initials, person.tone)}</div>
           </div>
@@ -898,7 +880,7 @@ function renderRoute() {
           </div>
         </article>
         <article class="route-card">
-          <div class="market-meta">${chip(item.tag || "Curated")}${chip("Saved friendly", "meta-chip ghost")}${chip("Wallet ready", "meta-chip ghost")}</div>
+          <div class="market-meta">${chip(item.tag || "Curated")}${chip(item.meta, "meta-chip ghost")}</div>
           <div class="action-row"><button class="primary-button" type="button" data-route="redemption">Redeem</button><button class="secondary-button" type="button" data-sheet-type="deal" data-sheet-id="${item.id}">Save</button></div>
         </article>
       </section>
@@ -921,7 +903,7 @@ function renderRoute() {
             <div class="route-copy">
               <p class="eyebrow">People graph</p>
               <h2>Reconnect through shared context, not noise.</h2>
-              <p>Filter by city, chapter, faculty and industry for warmer intros.</p>
+              <p>Lagos chapter</p>
             </div>
             <div class="route-visual">
               <div class="float-card"><strong>42</strong><span>relevant alumni nearby</span></div>
@@ -979,8 +961,8 @@ function sheetPayload(type, id) {
 
   if (type === "prompt") {
     return {
-      title: "Why this feels better",
-      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>Action after answer</strong><div class="card-copy">Zik AI routes members into actual app flows like hostels, planning and network discovery.</div></article></div>`,
+      title: "Sources",
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>Matches</strong><div class="card-copy">Hostels, planner and network actions are ready.</div></article></div>`,
     };
   }
 
@@ -1004,7 +986,7 @@ function sheetPayload(type, id) {
     const item = mentors.find((entry) => entry.id === id) || mentors[0];
     return {
       title: `Request intro to ${item.name}`,
-      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.role}</strong><div class="card-copy">The first contact stays inside the platform so the introduction feels safe and contextual.</div></article><button class="primary-button" type="button">Send request</button></div>`,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.role}</strong><div class="card-copy">Intro request</div></article><button class="primary-button" type="button">Send request</button></div>`,
     };
   }
 
@@ -1012,7 +994,7 @@ function sheetPayload(type, id) {
     const item = rewards.find((entry) => entry.id === id) || rewards[0];
     return {
       title: item.title,
-      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.copy}</strong><div class="card-copy">Redeem and receive a partner-ready code in your wallet immediately.</div></article><button class="primary-button" type="button">Confirm</button></div>`,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.copy}</strong><div class="card-copy">Partner code ready</div></article><button class="primary-button" type="button">Confirm</button></div>`,
     };
   }
 
@@ -1020,13 +1002,13 @@ function sheetPayload(type, id) {
     const item = connections.find((entry) => entry.id === id) || connections[0];
     return {
       title: item.name,
-      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.meta}</strong><div class="card-copy">${item.copy}</div></article><button class="primary-button" type="button">Request connection</button></div>`,
+      body: `<div class="sheet-stack"><article class="sheet-panel"><strong>${item.meta}</strong><div class="card-copy">${item.name}</div></article><button class="primary-button" type="button">Request connection</button></div>`,
     };
   }
 
   return {
     title: "Saved",
-    body: `<div class="sheet-stack"><article class="sheet-panel"><strong>Saved to your wallet</strong><div class="card-copy">This offer can now be revisited, redeemed or shared at the right moment.</div></article></div>`,
+    body: `<div class="sheet-stack"><article class="sheet-panel"><strong>Saved</strong><div class="card-copy">Added to shortlist</div></article></div>`,
   };
 }
 
@@ -1175,4 +1157,9 @@ document.addEventListener("click", (event) => {
 
 root.sheetCloseIcon.innerHTML = icons.close;
 render();
+
+
+
+
+
 

@@ -1388,3 +1388,502 @@ button {
   font-weight: 800;
   box-shadow: 0 10px 18px rgba(3, 20, 13, 0.16);
 }
+
+.hero-layout.compact {
+  grid-template-columns: 1fr;
+}
+
+.hero-copy.compact p:last-of-type {
+  display: none;
+}
+
+.hero-title.compact {
+  max-width: 12.5rem;
+}
+
+.poster-visual {
+  min-height: 150px;
+}
+
+.poster-stack {
+  position: relative;
+  height: 100%;
+}
+
+.poster-card {
+  position: absolute;
+  padding: 12px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 24px rgba(3, 20, 13, 0.16);
+  color: white;
+}
+
+.poster-card span,
+.offer-poster-footer span,
+.market-poster-copy span,
+.event-poster-copy span,
+.mentor-visual-card span,
+.wallet-mini-card span,
+.ai-answer-chips span {
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1.28;
+}
+
+.poster-card strong,
+.offer-poster-footer strong,
+.market-poster-copy strong,
+.event-poster-copy strong,
+.mentor-visual-card strong,
+.wallet-mini-card strong,
+.offer-value,
+.market-poster-price {
+  display: block;
+  font-family: "Sora", sans-serif;
+}
+
+.poster-primary {
+  left: 0;
+  top: 10px;
+  width: 58%;
+  min-height: 90px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.poster-secondary {
+  right: 0;
+  top: 0;
+  width: 38%;
+  min-height: 76px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.poster-tertiary {
+  right: 14px;
+  bottom: 4px;
+  width: 46%;
+  min-height: 82px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.visual-metric-row {
+  margin-top: 10px;
+}
+
+.mini-stat.glass {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.quick-action-rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.quick-action-rail.two-up {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quick-visual-card,
+.mentor-visual-card,
+.market-poster,
+.offer-poster,
+.event-poster {
+  text-align: left;
+}
+
+.quick-visual-card {
+  position: relative;
+  min-height: 136px;
+  padding: 14px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--tone) 82%, black), var(--tone));
+  color: white;
+  box-shadow: 0 18px 24px rgba(7, 24, 17, 0.12);
+}
+
+.quick-visual-card::before,
+.offer-poster-media::before,
+.market-poster-visual::before,
+.event-poster::before,
+.ai-visual-card::before,
+.rich-wallet-card::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -18px;
+  top: -26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.quick-visual-card::after,
+.offer-poster-media::after,
+.market-poster-visual::after,
+.event-poster::after,
+.ai-visual-card::after,
+.rich-wallet-card::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 110px;
+  left: -26px;
+  bottom: -36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.quick-visual-icon,
+.event-poster-mark {
+  position: relative;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.quick-visual-icon svg,
+.event-poster-mark svg {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+.quick-visual-art {
+  position: absolute;
+  inset: auto 14px 16px auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: -20px -14px 0 rgba(255, 255, 255, 0.08);
+}
+
+.quick-visual-label {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 1;
+  font-family: "Sora", sans-serif;
+  font-size: 0.95rem;
+}
+
+.poster-strip,
+.mentor-visual-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.offer-poster {
+  min-width: 210px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 18px 26px rgba(7, 24, 17, 0.08);
+}
+
+.offer-poster-media,
+.market-poster-visual {
+  position: relative;
+  min-height: 172px;
+  padding: 14px;
+  overflow: hidden;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--tone) 84%, black), var(--tone));
+  color: white;
+}
+
+.offer-value,
+.market-poster-price {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  font-size: 1.8rem;
+  line-height: 0.95;
+}
+
+.offer-mini-chip {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 1;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.offer-poster-footer,
+.market-poster-copy {
+  padding: 14px;
+}
+
+.offer-poster-footer span,
+.market-poster-copy span {
+  margin-top: 5px;
+  color: var(--muted);
+}
+
+.event-tile-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event-poster {
+  position: relative;
+  min-height: 116px;
+  border-radius: 28px;
+  padding: 16px 18px;
+  overflow: hidden;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--tone) 18%, white), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(255,255,255,0.72);
+}
+
+.event-date-badge {
+  width: 70px;
+  min-height: 70px;
+  border-radius: 20px;
+  padding: 10px 8px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.72);
+  color: var(--green);
+}
+
+.event-date-badge strong {
+  font-family: "Sora", sans-serif;
+  font-size: 1.15rem;
+}
+
+.event-date-badge span {
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.event-poster-copy {
+  position: absolute;
+  left: 108px;
+  right: 68px;
+  top: 22px;
+  z-index: 1;
+}
+
+.event-poster-copy strong {
+  font-family: "Sora", sans-serif;
+  font-size: 1.1rem;
+}
+
+.event-poster-copy span {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.event-poster-mark {
+  position: absolute;
+  right: 18px;
+  top: 22px;
+  color: var(--green);
+  background: rgba(13, 92, 68, 0.08);
+}
+
+.market-grid-media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.market-poster {
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.84);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: 0 18px 26px rgba(7, 24, 17, 0.08);
+}
+
+.market-poster-visual {
+  min-height: 150px;
+}
+
+.market-poster-art {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: -16px -10px 0 rgba(255, 255, 255, 0.08);
+}
+
+.market-poster-copy strong {
+  font-size: 0.95rem;
+}
+
+.market-poster-copy span {
+  font-size: 0.78rem;
+}
+
+.visual-ai-panel {
+  padding: 16px;
+}
+
+.ai-stage.visual {
+  grid-template-columns: 86px 1fr;
+}
+
+.ai-orb.large {
+  width: 86px;
+  height: 86px;
+  border-radius: 28px;
+}
+
+.ai-visual-card {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.92), rgba(236,245,239,0.94));
+}
+
+.chat-bubble.compact {
+  padding: 12px 14px;
+  max-width: 100%;
+}
+
+.ai-answer-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.ai-answer-chips span {
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(13, 92, 68, 0.08);
+  color: var(--green);
+  font-weight: 700;
+}
+
+.ai-prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.prompt-visual {
+  min-height: 86px;
+  padding: 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.72);
+  font-weight: 800;
+  color: var(--green);
+  text-align: left;
+}
+
+.prompt-visual.active {
+  background: linear-gradient(145deg, #0f4a37, #0d5c44);
+  color: white;
+}
+
+.mentor-visual-card {
+  min-width: 156px;
+  padding: 14px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tone) 16%, white), rgba(255,255,255,0.88));
+  border: 1px solid rgba(255,255,255,0.72);
+}
+
+.mentor-visual-card strong {
+  margin-top: 14px;
+  font-size: 0.95rem;
+}
+
+.mentor-visual-card span {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.rich-wallet-card {
+  padding-bottom: 20px;
+}
+
+.wallet-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.wallet-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.wallet-mini-card {
+  position: relative;
+  z-index: 1;
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.14);
+}
+
+.wallet-mini-card strong {
+  margin-top: 6px;
+  font-size: 1.05rem;
+}
+
+.compact-panel {
+  padding: 14px;
+}
+
+@media (max-width: 420px) {
+  .market-grid-media,
+  .ai-prompt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.header-copy p {
+  margin-top: 2px;
+  font-size: 0.82rem;
+}
+
+.card-copy,
+.offer-poster-footer span,
+.market-poster-copy span,
+.event-poster-copy span,
+.mentor-visual-card span,
+.note-copy {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.section-title {
+  letter-spacing: -0.02em;
+}
