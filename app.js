@@ -1,5 +1,5 @@
 ﻿const state = {
-  phase: "onboarding",
+  phase: "app",
   onboardingStep: 0,
   role: "student",
   tab: "home",
@@ -1157,6 +1157,7 @@ document.addEventListener("click", (event) => {
 
 root.sheetCloseIcon.innerHTML = icons.close;
 render();
+
 
 
 
