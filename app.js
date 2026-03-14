@@ -226,23 +226,25 @@ function avatar(initials, tone = "#0d5c44") {
 }
 
 const mediaLibrary = {
-  studentHero: "./assets/campus-hero.svg",
-  alumniHero: "./assets/alumni-hero-local.svg",
+  studentHero: "./assets/generated-campus-hero.png",
+  alumniHero: "./assets/generated-community-hero.png",
   housing: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
   meal: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
   study: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   career: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   business: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
-  event: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
-  community: "./assets/alumni-hero-local.svg",
+  event: "./assets/generated-event-story.png",
+  community: "./assets/generated-community-hero.png",
   wallet: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
-  ai: "./assets/zik-ai-stage.svg"
+  ai: "./assets/generated-zikai-hero.png",
+  campusStory: "./assets/generated-campus-story.png",
+  peopleStory: "./assets/generated-people-story.png"
 };
 
 const mentorMedia = {
-  "mentor-ifeoma": "./assets/mentor-ifeoma.svg",
-  "mentor-uche": "./assets/mentor-uche.svg",
-  "mentor-kingsley": "./assets/mentor-kingsley.svg"
+  "mentor-ifeoma": "./assets/generated-mentor-ifeoma.png",
+  "mentor-uche": "./assets/generated-mentor-uche.png",
+  "mentor-kingsley": "./assets/generated-mentor-kingsley.png"
 };
 
 function heroImage() {
@@ -525,7 +527,7 @@ function renderHome() {
 
       <div class="story-strip">
         <button class="story-pill active" type="button" data-route="${hero.route}">
-          <img class="story-pill-image" src="${hero.image}" alt="" />
+          <img class="story-pill-image" src="${state.role === "student" ? mediaLibrary.campusStory : mediaLibrary.peopleStory}" alt="" />
           <span>${state.role === "student" ? "Campus" : "Network"}</span>
         </button>
         <button class="story-pill" type="button" data-sheet-type="event" data-sheet-id="${leadEvent.id}">
@@ -533,7 +535,7 @@ function renderHome() {
           <span>Events</span>
         </button>
         <button class="story-pill" type="button" data-tab="community">
-          <img class="story-pill-image" src="${featureImage("community")}" alt="" />
+          <img class="story-pill-image" src="${mediaLibrary.peopleStory}" alt="" />
           <span>People</span>
         </button>
       </div>
