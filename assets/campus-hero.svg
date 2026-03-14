@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="40" x2="1050" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D5C44"/>
+      <stop offset="1" stop-color="#D6A348"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(880 180) rotate(140.418) scale(408.032 328.614)">
+      <stop stop-color="#fff" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="332" y1="406" x2="839" y2="838" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" rx="56" fill="url(#bg)"/>
+  <circle cx="916" cy="176" r="246" fill="url(#glow)"/>
+  <circle cx="187" cy="720" r="220" fill="#fff" fill-opacity=".08"/>
+  <path d="M0 688c118-96 237-144 356-144 167 0 233 87 354 87 122 0 192-81 328-123 54-17 108-24 162-20v312H0V688Z" fill="#083627" fill-opacity=".56"/>
+  <g opacity=".95">
+    <rect x="132" y="288" width="474" height="430" rx="32" fill="#F7F2E7" fill-opacity=".16" stroke="#fff" stroke-opacity=".22" stroke-width="3"/>
+    <rect x="170" y="332" width="184" height="142" rx="26" fill="#fff" fill-opacity=".2"/>
+    <rect x="378" y="332" width="190" height="92" rx="24" fill="#fff" fill-opacity=".14"/>
+    <rect x="378" y="444" width="190" height="232" rx="28" fill="#fff" fill-opacity=".1"/>
+    <rect x="170" y="492" width="184" height="184" rx="28" fill="#fff" fill-opacity=".12"/>
+  </g>
+  <g>
+    <path d="M706 686c0-114 73-196 166-196 93 0 166 82 166 196H706Z" fill="#162A20" fill-opacity=".36"/>
+    <circle cx="872" cy="414" r="78" fill="#7A4C31"/>
+    <path d="M806 430c8-76 42-132 94-132 48 0 88 39 96 119-29-26-56-36-83-32-34 6-57 14-107 45Z" fill="#13251C"/>
+    <path d="M830 447c11 52 44 88 86 88 43 0 77-38 87-93-32-21-64-30-96-26-31 4-50 16-77 31Z" fill="#A86A45"/>
+    <rect x="798" y="566" width="156" height="170" rx="44" fill="#F4EEE4" fill-opacity=".22"/>
+    <rect x="700" y="590" width="114" height="126" rx="34" fill="#FFFFFF" fill-opacity=".16"/>
+    <rect x="936" y="590" width="114" height="126" rx="34" fill="#FFFFFF" fill-opacity=".16"/>
+  </g>
+  <g>
+    <rect x="642" y="110" width="394" height="136" rx="30" fill="url(#glass)" stroke="#fff" stroke-opacity=".24" stroke-width="3"/>
+    <text x="688" y="168" fill="#fff" font-family="Sora, Arial, sans-serif" font-size="34" font-weight="700">Campus life</text>
+    <text x="688" y="212" fill="#fff" fill-opacity=".72" font-family="Manrope, Arial, sans-serif" font-size="24">UNIZIK students, housing and support</text>
+  </g>
+</svg>

@@ -226,23 +226,23 @@ function avatar(initials, tone = "#0d5c44") {
 }
 
 const mediaLibrary = {
-  studentHero: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
-  alumniHero: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80",
+  studentHero: "./assets/campus-hero.svg",
+  alumniHero: "./assets/alumni-hero-local.svg",
   housing: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
   meal: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
   study: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   career: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   business: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
   event: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
-  community: "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80",
+  community: "./assets/alumni-hero-local.svg",
   wallet: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
-  ai: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80"
+  ai: "./assets/zik-ai-stage.svg"
 };
 
 const mentorMedia = {
-  "mentor-ifeoma": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
-  "mentor-uche": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
-  "mentor-kingsley": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80"
+  "mentor-ifeoma": "./assets/mentor-ifeoma.svg",
+  "mentor-uche": "./assets/mentor-uche.svg",
+  "mentor-kingsley": "./assets/mentor-kingsley.svg"
 };
 
 function heroImage() {
@@ -681,50 +681,52 @@ function renderExplore() {
 
 function renderAI() {
   const prompt = prompts[state.prompt];
-  const related = state.prompt === "housing"
-    ? [marketplaceDeals[0], featuredDeals[1]]
-    : state.prompt === "timetable"
-      ? [featuredDeals[2], marketplaceDeals[4]]
-      : [marketplaceDeals[5], featuredDeals[0]];
 
   return `
-    <section class="screen-stack media-rich-screen">
-      ${searchField(prompt.title, `data-prompt="${state.prompt}"`)}
-
-      <article class="ai-cinema-card">
-        <img class="ai-cinema-image" src="${featureImage("ai")}" alt="" />
-        <div class="ai-cinema-scrim"></div>
-        <div class="ai-halo"></div>
-        <div class="ai-dialog-card main">
+    <section class="screen-stack media-rich-screen ai-chat-screen">
+      <article class="ai-chat-hero">
+        <img class="ai-chat-hero-image" src="${featureImage("ai")}" alt="" />
+        <div class="ai-chat-hero-scrim"></div>
+        <div class="ai-chat-topline">
           ${chip("Zik AI", "tiny-badge")}
-          <strong>${prompt.action}</strong>
-          <span>${prompt.answer.split(".")[0]}</span>
+          ${chip("Online", "tiny-badge ghost-light")}
         </div>
-        <button class="ai-dialog-card left" type="button" data-route="${prompt.route}">
-          <strong>Open</strong>
-          <span>${prompt.action}</span>
-        </button>
-        <button class="ai-dialog-card right" type="button" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
-          <strong>Matches</strong>
-          <span>3 live</span>
-        </button>
+        <div class="ai-chat-title">
+          <strong>Zik AI</strong>
+          <span>Your campus and alumni concierge</span>
+        </div>
       </article>
 
-      <div class="ai-prompt-grid cinematic-prompts">
-        ${Object.entries(prompts).map(([key, item]) => `<button class="prompt-visual ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}"><span>${item.action}</span></button>`).join("")}
+      <section class="chat-thread-card">
+        <div class="chat-message user">
+          <div class="chat-bubble-card user">${prompt.title}</div>
+        </div>
+        <div class="chat-message assistant">
+          <div class="assistant-avatar">ZA</div>
+          <div class="chat-bubble-card assistant">
+            <strong>${prompt.action}</strong>
+            <span>${prompt.answer}</span>
+          </div>
+        </div>
+        <div class="chat-action-row">
+          <button class="chat-action-card primary" type="button" data-route="${prompt.route}">
+            <strong>Open</strong>
+            <span>${prompt.action}</span>
+          </button>
+          <button class="chat-action-card" type="button" data-sheet-type="prompt" data-sheet-id="${state.prompt}">
+            <strong>Sources</strong>
+            <span>3 matches</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="ai-prompt-grid agent-prompts">
+        ${Object.entries(prompts).map(([key, item]) => `<button class="prompt-visual ${state.prompt === key ? "active" : ""}" type="button" data-prompt="${key}"><span>${item.title}</span></button>`).join("")}
       </div>
 
-      <div class="pulse-rail">
-        ${related.map((item) => `
-          <button class="pulse-card" type="button" data-route="deal-detail" data-route-id="${item.id}">
-            <img class="pulse-image" src="${mediaImage(item.id)}" alt="" />
-            <div class="pulse-scrim"></div>
-            <div class="pulse-copy">
-              <strong>${item.title}</strong>
-              <span>${item.value || item.price || item.meta}</span>
-            </div>
-          </button>
-        `).join("")}
+      <div class="chat-composer-shell">
+        <div class="chat-composer-input">Ask Zik AI anything</div>
+        <button class="composer-send" type="button" data-prompt="housing">${icons.arrow}</button>
       </div>
     </section>
   `;
