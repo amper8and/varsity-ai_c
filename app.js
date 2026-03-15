@@ -238,23 +238,33 @@ function avatar(initials, tone = "#0d5c44") {
 const mediaLibrary = {
   studentHero: "./assets/generated-campus-hero.png",
   alumniHero: "./assets/generated-community-hero.png",
-  housing: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-  meal: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
-  study: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
-  career: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
-  business: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+  housing: "./assets/generated-housing-market.png",
+  meal: "./assets/generated-meal-market.png",
+  study: "./assets/generated-study-market.png",
+  career: "./assets/generated-career-market.png",
+  business: "./assets/generated-business-market.png",
   event: "./assets/generated-event-story.png",
   community: "./assets/generated-community-hero.png",
-  wallet: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
+  wallet: "./assets/generated-wallet-market.png",
   ai: "./assets/generated-zikai-hero.png",
   campusStory: "./assets/generated-campus-story.png",
-  peopleStory: "./assets/generated-people-story.png"
+  peopleStory: "./assets/generated-people-story.png",
+  plannerHero: "./assets/generated-study-planner-hero.png",
+  campusMapHero: "./assets/generated-campus-hero.png",
+  redemptionHero: "./assets/generated-wallet-market.png",
+  verificationHero: "./assets/generated-verification-hero.png"
 };
 
 const mentorMedia = {
   "mentor-ifeoma": "./assets/generated-mentor-ifeoma.png",
   "mentor-uche": "./assets/generated-mentor-uche.png",
   "mentor-kingsley": "./assets/generated-mentor-kingsley.png"
+};
+
+const connectionMedia = {
+  "conn-1": "./assets/generated-connection-adaora.png",
+  "conn-2": "./assets/generated-connection-tobe.png",
+  "conn-3": "./assets/generated-mentor-kingsley.png"
 };
 
 function heroImage() {
@@ -279,6 +289,10 @@ function mentorImage(id) {
   return mentorMedia[id] || mediaLibrary.community;
 }
 
+function connectionImage(id) {
+  return connectionMedia[id] || mediaLibrary.community;
+}
+
 function featureImage(kind) {
   const images = {
     event: mediaLibrary.event,
@@ -288,6 +302,16 @@ function featureImage(kind) {
   };
 
   return images[kind] || mediaLibrary.community;
+}
+
+function eventImage(id) {
+  const images = {
+    "event-mixer": mediaLibrary.community,
+    "event-health": mediaLibrary.career,
+    "event-fair": mediaLibrary.meal
+  };
+
+  return images[id] || mediaLibrary.event;
 }
 
 function actionAttrs(item) {
@@ -909,17 +933,21 @@ function renderRoute() {
   if (route.id === "accommodation") {
     return `
       <section class="route-stack">
-        <article class="route-hero">
-          <div class="route-layout">
-            <div class="route-copy">
-              <p class="eyebrow">Hostel finder</p>
-              <h2>Trusted places near the parts of campus that matter most.</h2>
-              <p>Ifite corridor</p>
-            </div>
-            <div class="route-visual">
-              <div class="orb"></div>
-              <div class="float-card"><strong>52 rooms</strong><span>Verified this week</span></div>
-              <div class="signal-card"><strong>Ifite</strong><span>Most active corridor</span></div>
+        <article class="cinema-hero-card route-cinema-hero">
+          <img class="cinema-hero-image" src="${mediaLibrary.housing}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Hostel finder", "tiny-badge")}
+            ${chip("Ifite corridor", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-float-card glass">
+            <strong>52</strong>
+            <span>rooms verified</span>
+          </div>
+          <div class="cinema-bottom-row">
+            <div>
+              <h3>Near the right part of campus</h3>
+              <p>Safe, walkable, verified stays</p>
             </div>
           </div>
         </article>
@@ -932,6 +960,8 @@ function renderRoute() {
           ${marketplaceDeals.filter((item) => item.category === "housing").map((item) => `
             <button class="market-card" type="button" ${styleVars(item)} data-route="deal-detail" data-route-id="${item.id}">
               <div class="market-media">
+                <img class="market-media-image" src="${mediaImage(item.id)}" alt="" />
+                <div class="market-media-scrim"></div>
                 ${chip(item.tag, "tiny-badge")}
                 <div class="media-value" style="margin-top: 20px;">${item.price}</div>
                 <div class="media-badge"><strong>${item.meta}</strong><span>Near campus</span></div>
@@ -950,6 +980,20 @@ function renderRoute() {
   if (route.id === "campus-map") {
     return `
       <section class="route-stack">
+        <article class="cinema-hero-card route-cinema-hero compact-route-hero">
+          <img class="cinema-hero-image" src="${mediaLibrary.campusMapHero}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Campus map", "tiny-badge")}
+            ${chip("Awka", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-bottom-row compact-end">
+            <div>
+              <h3>Find buildings faster</h3>
+              <p>Lecture halls, services, food, support</p>
+            </div>
+          </div>
+        </article>
         <article class="map-panel">
           <p class="eyebrow">Map</p>
           <h3 class="section-title" style="margin-top: 8px;">Main campus</h3>
@@ -977,16 +1021,21 @@ function renderRoute() {
   if (route.id === "study-planner") {
     return `
       <section class="route-stack">
-        <article class="route-hero">
-          <div class="route-layout">
-            <div class="route-copy">
-              <p class="eyebrow">Weekly rhythm</p>
-              <h2>A calmer visual plan for classes, focus blocks and deadlines.</h2>
-              <p>Mon to Fri</p>
-            </div>
-            <div class="route-visual">
-              <div class="float-card"><strong>76%</strong><span>Week already mapped</span></div>
-              <div class="signal-card"><strong>Thu</strong><span>Light schedule before labs</span></div>
+        <article class="cinema-hero-card route-cinema-hero">
+          <img class="cinema-hero-image" src="${mediaLibrary.plannerHero}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Weekly rhythm", "tiny-badge")}
+            ${chip("Mon to Fri", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-float-card glass">
+            <strong>76%</strong>
+            <span>week mapped</span>
+          </div>
+          <div class="cinema-bottom-row">
+            <div>
+              <h3>Study planner</h3>
+              <p>Classes, focus blocks, deadlines</p>
             </div>
           </div>
         </article>
@@ -1011,6 +1060,20 @@ function renderRoute() {
   if (route.id === "event-calendar") {
     return `
       <section class="route-stack">
+        <article class="cinema-hero-card route-cinema-hero compact-route-hero">
+          <img class="cinema-hero-image" src="${featureImage("event")}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Events", "tiny-badge")}
+            ${chip("March", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-bottom-row compact-end">
+            <div>
+              <h3>What is on this month</h3>
+              <p>Mixers, careers, market days</p>
+            </div>
+          </div>
+        </article>
         <article class="calendar-panel">
           <p class="eyebrow">March</p>
           <h3 class="section-title" style="margin-top: 8px;">Events calendar</h3>
@@ -1019,7 +1082,20 @@ function renderRoute() {
           </div>
         </article>
         <div class="card-stack">
-          ${events.map((item) => `<button class="event-card" type="button" data-sheet-type="event" data-sheet-id="${item.id}"><div class="row-between"><div class="meta-chip">${item.month} ${item.day}</div>${chip(item.meta, "meta-chip ghost")}</div><div class="card-title" style="margin-top: 12px;">${item.title}</div><div class="card-copy">${item.copy}</div></button>`).join("")}
+          ${events.map((item) => `
+            <button class="event-media-card" type="button" data-sheet-type="event" data-sheet-id="${item.id}">
+              <img class="event-media-image" src="${eventImage(item.id)}" alt="" />
+              <div class="event-media-scrim"></div>
+              <div class="media-card-top">
+                <span class="event-date-pill">${item.month} ${item.day}</span>
+                ${chip(item.meta, "tiny-badge ghost-light")}
+              </div>
+              <div class="media-card-copy white">
+                <strong>${item.title}</strong>
+                <span>${item.copy}</span>
+              </div>
+            </button>
+          `).join("")}
         </div>
       </section>
     `;
@@ -1029,14 +1105,18 @@ function renderRoute() {
     const person = mentors.find((item) => item.id === route.ref) || mentors[0];
     return `
       <section class="route-stack">
-        <article class="route-hero">
-          <div class="route-layout">
-            <div class="route-copy">
-              <p class="eyebrow">Mentor profile</p>
-              <h2>${person.name}</h2>
+        <article class="cinema-hero-card route-cinema-hero">
+          <img class="cinema-hero-image" src="${mentorImage(person.id)}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Mentor", "tiny-badge")}
+            ${chip("Verified", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-bottom-row">
+            <div>
+              <h3>${person.name}</h3>
               <p>${person.role}</p>
             </div>
-            <div class="route-visual" style="display:flex; align-items:center; justify-content:center;">${avatar(person.initials, person.tone)}</div>
           </div>
         </article>
         <article class="route-card">
@@ -1051,16 +1131,21 @@ function renderRoute() {
     const item = routeDeal(route.ref);
     return `
       <section class="route-stack">
-        <article class="route-hero" ${styleVars(item)}>
-          <div class="route-layout">
-            <div class="route-copy">
-              <p class="eyebrow">Offer detail</p>
-              <h2>${item.title}</h2>
+        <article class="cinema-hero-card route-cinema-hero">
+          <img class="cinema-hero-image" src="${mediaImage(item.id)}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Offer detail", "tiny-badge")}
+            ${chip(item.tag || "Curated", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-float-card glass">
+            <strong>${item.value || item.price}</strong>
+            <span>${item.meta}</span>
+          </div>
+          <div class="cinema-bottom-row">
+            <div>
+              <h3>${item.title}</h3>
               <p>${item.copy || item.meta}</p>
-            </div>
-            <div class="route-visual">
-              <div class="float-card"><strong>${item.value || item.price}</strong><span>${item.tag}</span></div>
-              <div class="signal-card"><strong>${item.meta}</strong><span>Curated for the community</span></div>
             </div>
           </div>
         </article>
@@ -1075,7 +1160,35 @@ function renderRoute() {
   if (route.id === "job-board") {
     return `
       <section class="route-stack">
-        ${jobs.map((item) => `<article class="job-card"><div class="row-between"><div class="card-icon" style="--tone:${item.tone};">${icons.jobs}</div>${chip(item.meta)}</div><div class="card-title" style="margin-top: 12px;">${item.title}</div><div class="card-copy">${item.copy}</div></article>`).join("")}
+        <article class="cinema-hero-card route-cinema-hero compact-route-hero">
+          <img class="cinema-hero-image" src="${mediaLibrary.career}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Jobs", "tiny-badge")}
+            ${chip("Alumni backed", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-bottom-row compact-end">
+            <div>
+              <h3>Open roles</h3>
+              <p>Student-friendly and graduate-ready</p>
+            </div>
+          </div>
+        </article>
+        <div class="card-stack">
+          ${jobs.map((item) => `
+            <button class="job-media-card" type="button" data-sheet-type="job" data-sheet-id="${item.id}">
+              <img class="job-media-image" src="${mediaLibrary.career}" alt="" />
+              <div class="job-media-scrim"></div>
+              <div class="media-card-top">
+                ${chip(item.meta, "tiny-badge")}
+              </div>
+              <div class="media-card-copy white">
+                <strong>${item.title}</strong>
+                <span>${item.copy}</span>
+              </div>
+            </button>
+          `).join("")}
+        </div>
       </section>
     `;
   }
@@ -1083,21 +1196,38 @@ function renderRoute() {
   if (route.id === "alumni-network") {
     return `
       <section class="route-stack">
-        <article class="route-hero">
-          <div class="route-layout">
-            <div class="route-copy">
-              <p class="eyebrow">People graph</p>
-              <h2>Reconnect through shared context, not noise.</h2>
-              <p>Lagos chapter</p>
-            </div>
-            <div class="route-visual">
-              <div class="float-card"><strong>42</strong><span>relevant alumni nearby</span></div>
-              <div class="signal-card"><strong>Lagos</strong><span>Most active chapter</span></div>
+        <article class="cinema-hero-card route-cinema-hero">
+          <img class="cinema-hero-image" src="${featureImage("community")}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("People graph", "tiny-badge")}
+            ${chip("Lagos chapter", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-float-card glass">
+            <strong>42</strong>
+            <span>warm matches</span>
+          </div>
+          <div class="cinema-bottom-row">
+            <div>
+              <h3>Shared context first</h3>
+              <p>Mentors, chapters, intros, hiring</p>
             </div>
           </div>
         </article>
         <div class="card-stack">
-          ${connections.map((item) => `<button class="connection-card" type="button" data-sheet-type="connection" data-sheet-id="${item.id}">${avatar(item.initials, item.tone)}<div><div class="card-title">${item.name}</div><div class="card-copy">${item.meta}</div></div><div class="soft-button">${icon("arrow", "icon-holder")}</div></button>`).join("")}
+          ${connections.map((item) => `
+            <button class="connection-media-card" type="button" data-sheet-type="connection" data-sheet-id="${item.id}">
+              <img class="connection-media-image" src="${connectionImage(item.id)}" alt="" />
+              <div class="connection-media-scrim"></div>
+              <div class="media-card-top">
+                ${chip(item.meta, "tiny-badge ghost-light")}
+              </div>
+              <div class="media-card-copy white">
+                <strong>${item.name}</strong>
+                <span>${item.copy}</span>
+              </div>
+            </button>
+          `).join("")}
         </div>
       </section>
     `;
@@ -1106,13 +1236,23 @@ function renderRoute() {
   if (route.id === "redemption") {
     return `
       <section class="route-stack">
-        <article class="route-card">
-          <p class="eyebrow">Rewards</p>
-          <h3 class="section-title" style="margin-top: 8px;">Use your points beautifully</h3>
-          <div class="card-stack" style="margin-top: 14px;">
-            ${rewards.map((item) => `<button class="feature-card" type="button" style="--tone:${item.tone}; --tone-soft:${item.tone};" data-sheet-type="reward" data-sheet-id="${item.id}"><div class="media-top"><div class="media-value">${item.copy}</div><div class="media-badge"><strong>${item.title}</strong><span>Redeem instantly</span></div></div></button>`).join("")}
+        <article class="cinema-hero-card route-cinema-hero compact-route-hero">
+          <img class="cinema-hero-image" src="${mediaLibrary.redemptionHero}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Rewards", "tiny-badge")}
+            ${chip("Ready to redeem", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-bottom-row compact-end">
+            <div>
+              <h3>Spend points beautifully</h3>
+              <p>Meals, upgrades, data</p>
+            </div>
           </div>
         </article>
+        <div class="reward-media-strip deluxe-strip">
+          ${rewards.map((item) => `<button class="reward-media-card deluxe" type="button" style="--tone:${item.tone};" data-sheet-type="reward" data-sheet-id="${item.id}"><img class="reward-media-image" src="${item.id === "meal" ? mediaLibrary.meal : item.id === "data" ? mediaLibrary.study : mediaLibrary.wallet}" alt="" /><div class="reward-media-scrim"></div><div class="reward-media-copy"><strong>${item.title}</strong><span>${item.copy}</span></div></button>`).join("")}
+        </div>
       </section>
     `;
   }
@@ -1120,6 +1260,20 @@ function renderRoute() {
   if (route.id === "verification") {
     return `
       <section class="route-stack">
+        <article class="cinema-hero-card route-cinema-hero compact-route-hero">
+          <img class="cinema-hero-image" src="${mediaLibrary.verificationHero}" alt="" />
+          <div class="cinema-hero-scrim"></div>
+          <div class="cinema-top-row">
+            ${chip("Verification", "tiny-badge")}
+            ${chip("Identity linked", "tiny-badge ghost-light")}
+          </div>
+          <div class="cinema-bottom-row compact-end">
+            <div>
+              <h3>Trusted and active</h3>
+              <p>Access, safety, faster support</p>
+            </div>
+          </div>
+        </article>
         <article class="route-card">
           <p class="eyebrow">Verification</p>
           <h3 class="section-title" style="margin-top: 8px;">Trusted and active</h3>

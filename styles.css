@@ -811,6 +811,36 @@ button {
   min-height: 148px;
 }
 
+.market-media > *,
+.event-media-card > *,
+.job-media-card > *,
+.connection-media-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.market-media-image,
+.event-media-image,
+.job-media-image,
+.connection-media-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.market-media-scrim,
+.event-media-scrim,
+.job-media-scrim,
+.connection-media-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(7, 24, 17, 0.12), rgba(7, 24, 17, 0.68));
+}
+
 .market-meta,
 .person-meta,
 .job-meta,
@@ -919,6 +949,14 @@ button {
 
 .route-hero {
   padding: 18px;
+}
+
+.route-cinema-hero {
+  min-height: 226px;
+}
+
+.compact-route-hero {
+  min-height: 210px;
 }
 
 .route-media,
@@ -2650,6 +2688,58 @@ button {
   border-radius: 24px;
   background: var(--tone);
   color: white;
+}
+
+.event-media-card,
+.job-media-card,
+.connection-media-card {
+  position: relative;
+  min-height: 188px;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 20px 30px rgba(7, 24, 17, 0.12);
+  text-align: left;
+}
+
+.media-card-top,
+.media-card-copy {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  z-index: 1;
+}
+
+.media-card-top {
+  top: 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.media-card-copy {
+  bottom: 16px;
+}
+
+.media-card-copy.white strong,
+.media-card-copy.white span {
+  color: white;
+}
+
+.media-card-copy strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.06;
+}
+
+.media-card-copy span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  line-height: 1.34;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .reward-media-copy {
